@@ -1,0 +1,424 @@
+// vim: sts=4 sw=4 expandtab
+[#ch01-introducao]
+== Introdução
+
+Neste capítulo, você será apresentado à linguagem Kotlin.
+Você vai conhecer as características da linguagem -- incluindo sintaxe e principais recursos -- , suas origens, ferramentas de desenvolvimento, modelo de execução e relação com a linguagem Java.
+
+
+=== Primeiro contato
+
+Vamos começar com um vôo de reconhecimento.
+Veja exemplo a seguir.
+
+.Olá mundo
+[source,kotlin]
+[#example-hello]
+----
+fun main() {
+    val name = "mundo"
+    println("Olá, $name!")
+}
+----
+
+Neste pequeno programa, você pode perceber que:
+
+- A linguagem Kotlin não requer ponto-e-vírgula (`;`) nos finais de linha.
+- O ponto de entrada de um programa é a função `main()` -- assim como em Java.
+- A função `main()` é um elemento de nível superior -- isto é, não precisa estar dentro de uma classe.
+- A função `println()` é chamada diretamente (sem `System.out`).
+- A linguagem tem suporte a _templates_ de _string_ -- ou seja, nomes de variáveis (prefixados por `$`) podem ser inseridos entre aspas, como em:  `"Olá, $name!"` -> "Olá, mundo!".
+
+
+No exemplo <<example-hello>>, ainda aparecem duas palavras reservadas importantes:
+
+- `fun`: define uma função.
+- `val`: dá nome a um valor imutável.
+
+Um valor imutável -- declarado com `val` -- é como uma variável marcada com o modificador `final` em Java.
+Após a atribuição inicial, seu valor não pode mais ser alterado.
+Há também a palavra `var`, que permite declarar variáveis que podem ser alteradas.
+Porém, em Kotlin, _prefere-se usar valores imutáveis_, sempre que for possível.
+
+Essa preferência é uma das características da linguagem Kotlin que foram inspiradas em linguagens funcionais -- como Haskell e LISP, por exemplo.
+Na verdade, seu _design_ foi influenciado por várias linguagens.
+É fácil reconhecer, em Kotlin, características de linguagens como Python, Groovy, Pascal e -- obviamente -- Java.
+
+
+=== Executando seus programas
+
+Já podemos executar nosso primeiro programa.
+Há várias maneiras de se executar um código-fonte escrito em Kotlin.
+Vejamos.
+
+
+==== Kotlin Playground (online)
+
+A alternativa mais simples para se executar um código-fonte escrito em Kotlin é usar o serviço _online_ Kotlin Playground, disponível no _site_ da linguagem.
+Vamos usá-lo para executar o código do exemplo <<example-hello>>.
+Siga estes passos:
+
+. Selecione e copie o código contido no exemplo <<example-hello>>.
+. Em uma nova aba, abra o Kotlin Playground, pela URL: https://play.kotlinlang.org/
+. Remova qualquer código contido no editor do _playground_.
+. Cole o código do nosso exemplo.
+. Clique no botão _Run_, no canto superior direito da tela.
+
+O resultado está ilustrado na figura a seguir (<<img-playground>>).
+
+
+[#img-playground]
+.Executando código-fonte no Kotlin Playground
+image::ch01/playground.png[Kotlin Playground, 50%]
+
+
+==== Ambientes de desenvolvimento (computador local)
+
+Outra alternativa é usar seu computador local para desenvolver e executar programas em Kotlin.
+Existem vários ambientes de desenvolvimento disponíveis. 
+Uma opção é usar o compilador de linha de comando em conjunto com qualquer editor de textos -- como Notepad++, Vim ou algum outro.
+
+No entanto, é mais prático usar um ambiente de desenvolvimento integrado (IDE), como o Eclipse ou IntelliJ IDEA.
+Ambos contam com _plugins_ para se trabalhar com Kotlin.
+
+Instruções sobre o uso de cada uma dessas opções podem ser encontradas nos endereços a seguir:
+
+- Linha de comando:
+https://kotlinlang.org/docs/command-line.html
+- Eclipse IDE:
+https://kotlinlang.org/docs/eclipse.html
+- IntelliJ IDEA:
+https://kotlinlang.org/docs/run-code-snippets.html
+
+
+Aqui usaremos o IntelliJ IDEA, que oferece o suporte mais completo à linguagem Kotlin, incluindo recursos de auto-completar e refatoração.
+Usaremos, principalmente, o recurso _Scratch Editor_ (Editor de Rascunhos).
+Esse recurso nos permite escrever e executar código-fonte por meio de um arquivo temporário.
+Assim, podemos fazer experiências, escrevendo pequenos trechos de código para compreender o funcionamento da linguagem.
+
+Os arquivos temporários criados no editor de rascunhos são chamados de _scratch files_ (arquivos de rascunho).
+Para usá-los, primeiro é preciso criar um Projeto Kotlin no IntelliJ.
+Use as seguintes opções do menu principal: *File -> New -> Project ...*.
+Em seguida, você poderá criar um arquivo de rascunhos, usando as opções *File -> New -> Scratch File*
+(veja a figura a seguir: <<img-new-scratch>>).
+
+[#img-new-scratch]
+.Como criar um novo arquivo de rascunho
+image::ch01/idea-new-scratch.png[Novo Scratch File,70%]
+
+[#img-scratch-example]
+.Exemplo de arquivo de rascunho
+image::ch01/idea-scratch-example.png[Exemplo Scratch File,70%]
+
+
+Observe agora a figura <<img-scratch-example>>.
+Temos ali um pequeno programa que calcula a área de um círculo.
+Observe, no painel do lado direito, o resultado da execução de cada linha de código.
+Veja também que, neste caso, não foi preciso criar um método `main()`.
+Isso ocorre porque os arquivos de rascunho são executados como _scripts_.
+
+
+==== Arquivos-fonte vs scripts
+
+Há uma diferença sutil entre arquivos-fonte (`\*.kt`) e arquivos de _script_ (`*.kts`).
+Enquanto um arquivo-fonte é destinado à definição de elementos como classes e funções, que são usados posteriormente, um _script_ é um arquivo que contém código destinado à execução imediata.
+_Scripts_ são usados principalmente para automatizar tarefas.
+Você pode saber mais sobre _scripts_ consultando a link:https://kotlinlang.org/docs/command-line.html#run-scripts[documentação da linguagem].
+
+Na prática, podemos considerar que os arquivos-fonte (`*.kt`) requerem uma função `main()` como ponto de entrada do programa, enquanto nos arquivos de _script_ isso não é necessário.
+Se você tentar executar um arquivo-fonte sem definir uma função `main()`, o compilador exibirá a mensagem de erro: _"Expecting a top level declaration"_.
+
+O ambiente _online_ Kotlin Playground usa arquivos-fonte.
+Portanto, você sempre precisará definir uma função `main()`.
+Para executar o mesmo código nos arquivos de rascunho do IntelliJ (_scripts_), basta remover a declaração `fun main() {` e também a chave (`}`) na última linha, deixando apenas o corpo da função.
+
+
+=== Declarando variáveis
+
+Suponha que você queira declarar dois valores imutáveis e um variável em Java.
+Os tipos devem ser `double`, `String` e `int`.
+O código-fonte ficaria assim:
+
+[#variaveis-java]
+.Declaração de valores em Java
+[source,java]
+----
+final double x = 2.5;
+final String produto = "caneta";
+int y = 10;
+----
+
+
+Vimos que, em Kotlin, variáveis e valores imutáveis são declarados por `var` e `val`, respectivamente.
+Então, o mesmo resultado seria obtido por meio do seguinte código:
+
+[#variaveis-kotlin]
+.Declaração de valores em Kotlin
+[source,kotlin]
+----
+val x = 2.5
+val produto = "caneta"
+var y = 10
+----
+
+
+Nesse último exemplo, deve chamar a atenção a falta de especificadores de tipos -- como `Double`, `String` e `Int`.
+Contudo, ao executar esse código em um arquivo de rascunho do IntelliJ, verificamos que o compilador identifica corretamente os tipos de cada valor. Veja a figura:
+
+[#img-scratch-types]
+.Inferência de tipos
+image::ch01/scratch-types.png[Inferência de tipos,75%]
+
+
+Um dos recursos marcantes de Kotlin é a inferência de tipos. 
+Isso significa que o compilador identifica os tipos de variáveis a partir do contexto de uso.
+Por exemplo, ao encontrar o valor `2.5`, o compilador deduz (infere) que seu tipo é `Double`.
+Dessa maneira, todos os valores têm um tipo associado, mesmo que esse tipo não seja explicitamente declarado.
+
+O recurso de inferência não impede que os tipos sejam declarados explicitamente.
+Para declarar um tipo, você deve indicá-lo _após o nome da variável_ precedido pelo sinal de dois pontos (`:`).
+Veja um exemplo.
+
+[#variaveis-kotlin-tipos]
+.Valores com tipos declarados
+[source,kotlin]
+----
+val x: Double = 2.5
+val produto: String = "caneta"
+var y: Int = 10
+----
+
+[TIP]
+====
+Execute o código do exemplo <<variaveis-kotlin-tipos>> em um arquivo de rascunhos (Scratch Editor) do IntelliJ.
+
+. Experimente alterar o valor de `"caneta"` para `3`, sem mudar o tipo `String`.
+Em seguida, repita esse procedimento removendo a declaração do tipo.
+
+. Experimente alterar o valor de `2.5` para `2`, mantendo a especificação do tipo `Double`.
+Por quê o compilador indica um erro após essa alteração?
+====
+
+
+=== Lendo dados do teclado
+
+No próximo exemplo, vamos ver como ler dados do teclado.
+
+.Leitura de dados do teclado
+[#uri-1002]
+[source,kotlin,highlight=4..4]
+----
+const val PI = 3.14159   // definição de PI
+
+fun main() {
+    val raio = readLine()!!.toDouble()
+    val area = PI * raio * raio
+
+    /*
+       Exibindo o resultado formatado
+       com 4 casas decimais
+     */
+    println("A=%.4f".format(area))
+}
+----
+
+
+A função `readLine()` lê uma linha de texto do teclado e retorna um valor do tipo `String`.
+O método `toDouble()` converte um objeto do tipo `String` para um valor numérico do tipo `Double`.
+O operador `!!` -- antes da chamada a `toDouble()` -- força o lançamento de uma exceção se, por acaso, o método `readLine()` retornar o valor `null`. (Veremos mais sobre valores nulos e o operador `!!` no capítulo <<ch04-sistema-tipos>>).
+
+
+A expressão `const val` -- linha (1) -- define uma link:https://kotlinlang.org/docs/properties.html#compile-time-constants[constante em tempo de compilação]. 
+Uma constante é diferente de um valor imutável -- declarado com `val` -- , pois o valor da constante é conhecido em tempo de compilação. 
+É algo semelhante ao que acontece com a macro `#define`, da linguagem C, ou com o modificador `constexpr`, de C++.
+Além de tornar o código mais legível, o modificador `const` permite que o compilador faça otimizações.
+
+Neste exemplo, também usamos o método `format()` -- linha (11) -- para formatar o valor de ponto flutuante `area` com 4 casas decimais.
+Kotlin usa a biblioteca padrão da linguagem Java.
+Portanto, esse é o método `format()` da classe `java.lang.String`, exatamente como está documentado na link:https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html[espeficação da API Java].
+
+Finalmente, ainda ocorrem, neste exemplo, duas formas de comentários:
+
+- Comentários de múltiplas linhas, marcados por `/* */` -- nas linhas de 7 a 10.
+- Comentários de linha única, marcados por `//` -- na linha 1.
+
+
+[sidebar]
+.Kotlin em competições de programação
+[#programacao-competitiva]
+--
+Em competições de programação, vence o programador que resolver corretamente o maior número de problemas, no menor tempo possível.
+As respostas podem ser desenvolvidas em várias linguagens de programação e a correção é automática. 
+Há diversos _sites_ para prática da programação competitiva.
+Esses _sites_ hospedam coletâneas de problemas de programação e fornecem sistemas para correção das respostas (_judges_).
+
+A linguagem Kotlin está entre as linguagens de programação aceitas por alguns _judges_. 
+O exemplo <<uri-1002>>, por exemplo, é a solução para o problema link:https://www.beecrowd.com.br/judge/pt/problems/view/1002[Área do Círculo], disponível no _site_ brasileiro link:https://www.beecrowd.com.br[beecrowd].
+
+Também há link:https://kotlinlang.org/docs/competitive-programming.html[uma página] dedicada à programação competitiva na documentação da linguagem Kotlin. 
+Nessa página você encontrará uma compilação de técnicas de programação normalmente usadas em competições -- como ler dois inteiros separados por espaços, por exemplo.
+--
+
+
+=== Objetos e programação funcional
+
+Kotlin combina recursos dos paradigmas de programação orientado a objetos e funcional.
+Nesta seção, conheceremos mais alguns recursos da linguagem por meio de um exemplo de cada um desses paradigmas.
+
+==== Programação orientada a objetos
+
+No exemplo <<exemplo-classes>>, a seguir, temos a definição de uma classe, seguida pela criação de duas instâncias.
+
+
+.Classes e objetos
+[#exemplo-classes]
+[source,kotlin]
+----
+class Produto(
+    val nome: String,
+    var preco: Double,
+    var isPromocao: Boolean = false,    // <1>
+)
+
+
+fun main() {
+    val p1 = Produto("caderno", 8.50)    // <2>
+    val p2 = Produto("caneta", 1.10, true)
+
+    println("Produto: ${p1.nome} - ${p1.preco}")
+}
+----
+<1> Propriedade com valor padrão (_default_)
+<2> Criação de objeto: assumindo o valor _default_ da propriedade `isPromocao`
+
+
+Observe que os atributos -- `nome`, `preco` e `isPromocao` -- são definidos entre parênteses, logo após o nome da classe `Produto`.
+Os tipos são definidos após os nomes, precedidos por um sinal de dois pontos (`:`).
+O atributo `isPromocao`, do tipo `Boolean`, tem um valor padrão (`false`).
+Isso o torna opcional especificá-lo no construtor.
+
+Veja que, enquanto o atributo `nome` é especificado com a palavra `val`, os demais são especificados por `var`.
+Isso implica que `nome` é um atributo somente-leitura.
+Uma vez criado um objeto, esse atributo não poderá mais ser alterado.
+
+Perceba ainda que a classe `Produto` não tem um corpo definindo construtor e métodos `get`/`set`.
+Tudo isso é gerado automaticamente.
+
+Na função `main()`, são criadas duas instâncias de produto: `p1` e `p2`.
+Perceba a ausência da palavra `new`.
+Para criar instâncias de objetos, basta chamar o nome da classe, seguido pela lista de atributos entre parênteses.
+Atributos com valor _default_ podem ser omitidos.
+
+Finalmente, observe, na última linha, a composição de uma _string_ contendo nome e preço de um produto.
+Nesse caso, além do cifrão (`$`), foi preciso especificar a expressão entre chaves (`${p1.preco}`) devido à presença do ponto (`.`).
+
+[TIP]
+====
+Experimente executar o exemplo <<exemplo-classes>> no link:https://play.kotlinlang.org/[Kotlin Playground].
+====
+
+Com este exemplo, pudemos ter uma ideia inicial dos recursos de Kotlin para programação orientada a objetos.
+Vejamos agora um exemplo envolvendo o paradigma funcional.
+
+
+==== Programação funcional
+
+Suponha que você precise desenvolver um programa que receba uma lista de palavras e encontre a palavra mais longa entre aquelas que começarem com a letra "a".
+Veja uma solução para esse problema no exemplo a seguir.
+
+.Programação funcional
+[#exemplo-fp]
+[source,kotlin]
+----
+fun main() {
+    val palavras = listOf("alho", "cenoura", "alface", "cebola")
+    val maisLonga = palavras
+        .filter { it.startsWith("a") }
+        .maxByOrNull { it.length }
+    println("Palavra mais longa: $maisLonga")
+}
+----
+
+O método `filter` gera uma nova lista, contendo apenas as palavras que começam com a letra "a".
+O método `maxByOrNull` é aplicado a essa nova lista, retornando a _string_ com o maior comprimento (`length`) ou `null`, se por acaso a lista estiver vazia.
+
+Imagine como seria obter o mesmo resultado usando o paradigma imperativo, combinando estruturas `for` e `if`.
+O paradigma funcional nos permite desenvolver facilmente uma solução bastante concisa.
+Na verdade, essa abordagem não é uma exclusividade da linguagem Kotlin.
+Podemos obter resultado semelhante usando a link:https://www.oracle.com/br/technical-resources/articles/java-stream-api.html[Stream API], da linguagem Java.
+Contudo, usar o paradigma funcional é bastante fácil em Kotlin, pois esses recursos são parte da própria linguagem.
+
+[TIP]
+====
+Execute o exemplo <<exemplo-fp>> no Kotlin Playground ou em seu ambiente de desenvolvimento.
+Faça as seguintes experiências:
+
+. Remova a linha contendo a chamada ao método `filter` e observe o resultado do programa.
+. Agora, ponha de volta a linha contendo `filter` e remova da lista as palavras que começam com "a".
+====
+
+Estudaremos mais sobre os recursos de Kotlin para o paradigma orientado a objetos e o para o paradigma funcional nos capítulos <<ch03-objetos-heranca>> e <<ch05-programacao-funcional>>, respectivamente.
+
+
+[#sec-origens-linguagem]
+=== Origens da linguagem
+
+Agora que já conhecemos alguns aspectos técnicos da linguagem Kotlin, vamos falar sobre suas origens. 
+
+Kotlin foi criada para ser uma alternativa à linguagem Java.
+Seus criadores buscavam desenvolver uma linguagem mais concisa, mais produtiva e mais segura do que Java, mas que pudesse ser usada nos mesmos contextos.
+Aqui, "segura" se refere a erros em tempo de execução, como os erros de ponteiro nulo.
+Para atingir o objetivo de ser mais segura, Kotlin conta com um forte sistema de tipagem estática -- ao que tudo indica, inspirado na link:https://www.haskell.org/[linguagem Haskell].
+
+A linguagem foi criada pela empresa JetBrains no ano de 2010, tendo sua primeira versão foi publicada no ano de 2016.
+Desde o início, é desenvolvida como um projeto _open source_, com código-fonte publicado na plataforma GitHub.
+Ferramentas de desenvolvimento, como compiladores e ambientes integrados (IDEs) podem ser obtidos gratuitamente.
+IntelliJ IDEA e Android Studio são os principais ambientes de desenvolvimento.
+Também há um _plugin_ para o Eclipse.
+
+Desde 2019, link:https://developer.android.com/kotlin/first[Kotlin é a linguagem recomendada pela Google] para o desenvolvimento de aplicativos Android, substituindo a linguagem Java.
+Kotlin também pode ser usada no lugar da linguagem Java para o desenvolvimento de software nas plataformas _web_ e _desktop_.
+
+
+==== Kotlin e a plataforma Java
+
+Kotlin foi projetada para ter total interoperabilidade com Java.
+Objetos definidos em uma linguagem podem ser acessados a partir da outra de maneira transparente.
+
+Kotlin é compilada para _bytecode_.
+Logo, para a máquina virtual (JVM), não há diferença entre objetos escritos em Kotlin e objetos escritos em Java.
+Isso permite, por exemplo, que em um mesmo projeto, tenhamos código escrito nas duas linguagens.
+A compilação para _bytecode_ também permite que Kotlin seja executada de maneira transparente pela máquina virtual do sistema Android.
+
+Outra consequência natural da compilação para _bytecode_ é o acesso a qualquer biblioteca desenvolvida em Java.
+Kotlin pode acessar as bibliotecas do sistema Android, implementar interfaces do _Spring Framework_ ou acessar uma classe do pacote `java.util` sem dificuldades.
+
+Na verdade, a ligação com a plataforma Java é bastante forte.
+A linguagem Kotlin não possui uma biblioteca padrão própria.
+Kotlin usa e estende as funcionalidades da biblioteca padrão Java.
+As interfaces e as implementações do _framework_ de coleções, por exemplo, são as mesmas da biblioteca padrão Java.
+
+Além de executar o código Kotlin na JVM, também é possível traduzi-lo para JavaScript, para ser executado em ambiente _frontend Web_.
+É possível, inclusive, gerar código executável nativo para ser executado diretamente pelo sistema operacional.
+
+No entanto, Java é a principal plataforma para execução de aplicativos desenvolvidos em Kotlin.
+Um aplicativo Kotlin é uma combinação do código-fonte -- compilado para _bytecode_ -- com as classes da biblioteca padrão Java e a biblioteca de extensões de Kotlin (_Kotlin runtime_). Tudo isso sendo executado sobre a JVM.
+
+
+=== Documentação e manual da API
+
+O _site_ da linguagem Kotlin está hospedado do endereço https://kotlinlang.org.
+Na seção link:https://kotlinlang.org/docs/home.html[Docs], você encontrará materiais de estudo, como tutoriais e exemplos.
+Também na seção Docs, você encontrará o manual de referência da API da linguagem  (_link_ "API reference") onde estão documentadas suas funções próprias, assim como as extensões de Kotlin para a biblioteca padrão da linguagem Java.
+
+
+////
+TODO Incluir exercícios em uma versão futura
+
+=== Exercícios
+
+Nesta seção, recomendaremos alguns exercícios para consolidar o que foi aprendido.
+Usaremos os exercícios encontrados no _site_ link:https://www.beecrowd.com.br[beecrowd].
+Antes de iniciar os exercícios, recomendamos que você leia o conteúdo contido no quadro <<programacao-competitiva>>.
+////
+

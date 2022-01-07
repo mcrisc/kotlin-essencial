@@ -1,0 +1,17 @@
+// vim: sts=4 sw=4 expandtab
+[#ch04-sistema-tipos]
+== Sistema de tipos
+
+////
+TODO conteúdo do capítulo aqui
+
+- casts inteligentes [p.64]
+////
+
+// === Seção 1
+
+// === Seção 2
+
+====
+Capítulo em elaboração
+====

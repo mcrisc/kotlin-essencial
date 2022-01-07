@@ -1,0 +1,18 @@
+// vim: sts=4 sw=4 expandtab
+[#ch03-objetos-heranca]
+== Objetos e herança
+
+////
+TODO Descrever conteúdo do capítulo
+
+- Classes e propriedades [p.52]
+
+- Herança, interfaces, etc.
+- Depois seguir a partir do capítulo 4 [p.110]
+
+////
+
+====
+Capítulo em elaboração
+====
+

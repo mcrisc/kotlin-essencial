@@ -1,0 +1,33 @@
+// vim: sts=4 sw=4 expandtab
+
+= Kotlin Essencial
+:author: Marcelo Criscuolo
+:linkattrs:
+:hide-uri-scheme:
+:last-update-label!:
+:doctype: book
+:description: Uma introdução rápida à Linguagem Kotlin para programadores Java
+:pagenums:
+:sectnums:
+:sectlinks:
+:toc: left
+:toc-title: Conteúdo
+:source-highlighter: pygments
+:pygments-style: manni
+:source-linenums-option:
+:imagesdir: images
+:figure-caption: Figura
+:icons: font
+:tip-caption: Experiência
+:docinfo: shared
+
+
+O essencial sobre Kotlin para programadores Java.
+
+
+include::chapters/ch01-introducao.adoc[]
+include::chapters/ch02-estruturas-basicas.adoc[]
+include::chapters/ch03-objetos-heranca.adoc[]
+include::chapters/ch04-sistema-tipos.adoc[]
+include::chapters/ch05-programacao-funcional.adoc[]
+include::about.adoc[]

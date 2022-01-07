@@ -1,0 +1,668 @@
+// vim: sts=4 sw=4 expandtab
+[#ch02-estruturas-basicas]
+== Estruturas básicas
+
+Neste capítulo, estudaremos as estruturas básicas da linguagem Kotlin.
+Começaremos com estruturas condicionais.
+Em seguida, veremos as estruturas de repetição e de iteração.
+Depois estudaremos os mecanismos de tratamento de exceções e, finalmente, estudaremos as funções.
+
+
+=== Condições
+
+Aqui conheceremos os comandos `if` e `when`.
+
+
+==== Comando if
+
+Imagine que uma loja oferece um desconto de 5% para compras acima de R$ 20,00.
+Essa política pode ser implementada por um comando `if`, da seguinte maneira:
+
+
+.Política de descontos
+[source,kotlin]
+[#exemplo-desconto-1]
+----
+val total = 23.0
+
+var porcentagem: Double    // <1>
+if (total > 20) {
+    porcentagem = 0.05
+} else {
+    porcentagem = 0.0
+}
+
+val desconto = total * porcentagem
+
+println("Desconto: %.2f".format(desconto))
+----
+<1> Variável declarada com `var`: pode ser alterada posteriormente.
+Foi preciso especificar o tipo `Double`, pois o compilador não poderia inferir o tipo automaticamente sem um valor inicial.
+
+
+Veja que, neste caso, o camando `if` funciona exatamente como em Java.
+Mas, em Kotlin, o comando `if` pode ser usado como uma expressão que retorna um valor.
+Vejamos como ficaria o exemplo anterior:
+
+.Expressão com if
+[source,kotlin]
+[#exemplo-desconto-2]
+----
+val total = 23.0
+val porcentagem = if (total > 20) 0.05 else 0.0    // <1>
+val desconto = total * porcentagem
+
+println("Desconto: %.2f".format(desconto))
+----
+<1> A variável `porcentagem` não precisa mais ser declarada com `var`.
+Agora, seu tipo também pode ser inferido pelo compilador.
+
+
+Observe que, agora, o comando `if` funciona como o operador ternário da linguagem Java (`x > y ? x : y`), retornando o primeiro valor, se a condição for verdadeira, ou o segundo, se a condição for falsa.
+
+Aliás, o operador ternário não existe na linguagem Kotlin.
+
+
+==== Comando when
+
+O link:https://pt.wikipedia.org/wiki/Alfabeto_fon%C3%A9tico_da_OTAN[alfabeto fonético da OTAN] -- também conhecido como "alfabeto Zulu" -- relaciona cada letra do alfabeto a uma palavra.
+Por exemplo: A -> Alpha, B -> Bravo, C -> Charlie, e assim por diante.
+Esse alfabeto é usado em comunicações por rádio.
+Em vez de dizer "C - B", o transmissor da mensagem dirá "Charlie - Bravo", evitando erros de entendimento.
+
+Suponha que você precise desenvolver um programa que mostre a palavra correspondente a cada letra do alfabeto fonético.
+Uma boa opção seria usar o comando `when`.
+Veja a seguir.
+
+.Mapeamento para alfabeto fonético
+[source,kotlin]
+[#exemplo-otan]
+----
+val letra = 'b'
+when (letra) {
+    'a' -> {    // <1>
+        println("Alpha")
+    }
+    'b' -> println("Bravo")    // <2>
+    'c' -> println("Charlie")
+    'd' -> println("Delta")
+    else -> println("???")
+}
+----
+<1> Após o símbolo `\->`, deve vir um bloco de comandos delimitado por chaves (`{ }`).
+<2> Para um único comando as chaves são opcionais.
+
+
+O comando `when` é similar ao comando `switch`, da linguagem Java.
+Ele compara seu argumento -- neste caso a variável `letra` -- com cada um dos ramos contido no bloco de código que o segue.
+Se o valor à esquerda do sinal `\->` for igual ao valor atual do argumento, aquele bloco será executado.
+O ramo opcional `else` será executado se nenhum dos outros for selecionado.
+
+Assim como `if`, o comando `when` também pode ser usado como uma expressão.
+Veja como ficaria o exemplo anterior.
+
+.Usando when como expressão
+[source,kotlin]
+[#exemplo-otan-expr]
+----
+val letra = 'b'
+val palavra = when (letra) {
+    'a' -> "Alpha"
+    'b' -> "Bravo"
+    'c' -> "Charlie"
+    'd' -> "Delta"
+    else -> "???"
+}
+println(palavra)
+----
+
+
+Dessa vez, usamos uma variável para receber a palavra selecionada pelo comando `when`.
+(Sim! É uma variável que não varia. Mas, daqui em diante, vamos simplificar chamando tudo de variável, mesmo que seja declarado com `val`).
+Nesta situação o ramo `else` se torna obrigatório, pois algum valor precisa ser retornado.
+Outra opção seria usar o `else` para gerar uma exceção.
+
+Vamos agora considerar outra situação.
+Imagine que você deseja relacionar uma letra à sua tecla correspondente em um teclado de telefone -- como este que está ilustrado na figura <<img-t9-keypad>>.
+Por exemplo, queremos relacionar b -> 2, e -> 3 e c -> 2.
+
+[#img-t9-keypad]
+.Teclado de telefone
+image::ch02/telephone-keypad.svg[Teclado de telefone, 260]
+
+
+Novamente, usaremos o comando `when`.
+Vamos começar com uma versão bastante direta, criando um mapeamento para cada letra.
+Veja:
+
+.Mapeando letras para teclas
+[source,kotlin]
+[#exemplo-t9]
+----
+val letra = 'e'
+val numero =
+    when (letra) {
+        'a' -> 2
+        'b' -> 2
+        'c' -> 2
+        'd' -> 3
+        'e' -> 3
+        'f' -> 3
+        else -> 0
+    }
+println(numero)
+----
+
+
+Esse programa vai ficar bastante longo e repetitivo, se mapearmos todas as 26 letras do alfabeto.
+A seguir, vamos explorar a sintaxe do comando `when` para simplificar o código.
+
+.Comando when com valores separados por vírgula
+[source,kotlin]
+[#exemplo-t9-simplificado]
+----
+val letra = 'e'
+val numero =
+    when (letra) {
+        'a', 'b', 'c' -> 2
+        'd', 'e', 'f' -> 3
+        else -> 0
+    }
+println(numero)
+----
+
+As letras que levam à mesma tecla podem ser agrupadas em um só ramo, com os caracteres correspondentes separados por vírgula.
+É como se houvesse um operador OU entre eles: `a OU b OU c -> 2`.
+
+Ainda podemos fazer mais uma simplificação.
+O operador `in` verifica se um valor `x` pertence a uma coleção.
+Por exemplo, podemos usar `in` para verificar se 3 pertence à lista [1, 3, 4, 5] -- `3 in listOf(1, 3, 4, 5)`.
+Ou ainda, para verificar se 'b' faz parte da _string_ "cebola" -- `'b' in "cebola"`.
+Podemos usar esse operador em conjunto com o comando `when`, deixando o exemplo anterior da seguinte maneira:
+
+.Operador in em conjunto com when
+[source,kotlin]
+[#exemplo-t9-in]
+----
+val letra = 'e'
+val numero =
+    when (letra) {
+        in "abc" -> 2
+        in "def" -> 3
+        else -> 0
+    }
+println(numero)
+----
+
+
+Usando esse recurso, obtivemos um código mais legível.
+Aliás, como vimos na seção <<sec-origens-linguagem>>, gerar código mais legível, mais conciso, é um dos objetivos da linguagem Kotlin.
+
+
+==== Enumerações (enums)
+
+Para encerrar esta seção, vejamos uma situação envolvendo enumerações.
+
+Vamos determinar o fator de rendimento de um veículo, em função do tipo de combustível.
+Há dois combustíveis possíveis: álcool e gasolina.
+Usaremos uma enumeração para representá-los em nosso programa.
+Veja:
+
+.Enumerações
+[source,kotlin]
+[#exemplo-enum]
+----
+enum class Combustivel {    // <1>
+    ALCOOL, GASOLINA
+}
+
+val combustivel = Combustivel.ALCOOL
+val fatorRendimento =
+    when (combustivel) {
+        Combustivel.ALCOOL -> 0.7
+        Combustivel.GASOLINA -> 1.0
+    }
+----
+<1> Uma enumeração é declarada pelas palavras `enum class` -- usadas em conjunto.
+
+Observe que, dessa vez, o ramo `else` não está presente na expressão `when`.
+Ele se tornou opcional porque todas as possibilidades foram cobertas -- isto é, o comando `when` contém um ramo para cada valor possível da enumeração.
+
+
+=== Repetição
+
+Vamos dar uma olhada nas estruturas de repetição -- os laços -- da linguagem Kotlin.
+
+
+==== Comando while
+// https://kotlinlang.org/docs/control-flow.html#while-loops
+
+A estrutura dos comandos `while` e `do-while` é idêntica à de Java.
+Pronto! Poderíamos parar por aqui. Mas vamos ver um exemplo.
+
+O programa a seguir é uma solução para o problema _Números Ímpares_ , disponível na plataforma _beecrowd_
+(link:https://www.beecrowd.com.br/judge/pt/problems/view/1067[bee #1067]).
+É um problema simples.
+Você deve ler um número inteiro X.
+Em seguida, deve mostrar os ímpares de 1 até X, um valor por linha -- inclusive o X, se for o caso.
+
+
+.Números ímpares
+[source,kotlin]
+[#exemplo-while]
+----
+fun main(args: Array<String>) {
+    val limite = readLine()!!.toInt()    // <1>
+    var n = 1
+    while (n <= limite) {    // <2>
+        println(n)
+        n += 2
+    }
+}
+----
+<1> Lendo um número inteiro do teclado
+<2> Repetição com `while`
+
+
+Para resolver o problema, temos que gerar a sequência 1, 3, 5, 7, ... .
+Assim, partindo de 1, somamos 2 ao número atual para obter o próximo ímpar.
+Repetimos essa operação _enquanto_ o número for menor ou igual ao limite.
+Esse é o algoritmo implementado no exemplo anterior, por meio do comando `while`.
+
+As instruções `break` e `continue` também existem em Kotlin.
+
+[TIP]
+====
+Crie uma versão do programa  <<exemplo-while>> usando a instrução `break`.
+Fique à vontade para usar as constantes booleanas `true` e `false`, se precisar.
+
+Será uma versão bem menos elegante. Mas é só para praticar.
+====
+
+
+==== Comando for
+// https://kotlinlang.org/docs/control-flow.html#for-loops
+
+A estrutura do comando `for` é semelhante àquela do comando _for-each_ da linguagem Java.
+O `for` serve para percorrer elementos de um _iterator_.
+Na maioria dos casos, é usado para iterar por elementos uma coleção ou de um intervalo.
+Vejamos a seguir.
+
+.Iterando por uma lista
+[source,kotlin]
+[#exemplo-for-each]
+----
+val produtos = listOf("alho", "batata", "cebola", "tomate")
+
+for (p in produtos) {
+    println(p)
+}
+----
+
+A cada iteração, a variável `p` assume o valor de um dos elementos da coleção `produtos`.
+Observe o operador `in` que, nesse contexto, assume a função de relacionar a variável de iteração `p` com a coleção.
+É uma função diferente da que foi vista no exemplo <<exemplo-t9-in>>.
+
+O comando `for` tradicional -- `for (i=0; i < n; i++)` -- não existe em Kotlin, mas podemos usar intervalos (_ranges_) para iterar sobre intervalos numéricos.
+Intervalos são objetos que representam intervalos como [1..10] -- de 1 até 10.
+Vejamos um caso de uso desse recurso.
+
+.Iterando por intervalos numéricos
+[source,kotlin]
+[#exemplo-for-range]
+----
+for (i in 1..10) {
+    println(i)
+}
+----
+
+O comando `for` vai iterar pelos elementos do intervalo `1..10`.
+Observe a sintaxe: dois pontos (`..`) separam os valores inicial e final.
+Observe também que o limite final, 10, também faz parte do intervalo.
+
+O comando `for` de Kotlin é bastante parecido com o da linguagem link:https://groovy-lang.org/[Groovy].
+Inclusive por usar o conceito de intervalos (_ranges_).
+
+
+Vejamos um exemplo final: uma contagem regressiva, de dois em dois.
+
+.Contagem regressiva de dois em dois
+[source,kotlin]
+[#exemplo-for-downto]
+----
+for (i in 10 downTo 0 step 2) {
+    println(i)
+}
+----
+
+Neste caso, a iteração começará em 10 e terminará em 0 (`10 downTo 0`).
+Além disso, a contagem será de 2 em 2 (`step 2`).
+Portanto, o resultado será: 10, 8, 6, 4, 2, 0.
+
+Você pode saber mais sobre `downTo` e `step` consultando a link:https://kotlinlang.org/docs/ranges.html[documentação].
+
+[TIP]
+====
+Experimente executar os exemplos do comando `for` no link:https://play.kotlinlang.org/[Kotlin Playground].
+Lembre-se de definir um método `main()`.
+====
+
+
+
+=== Funções
+
+Nesta seção, vamos conhecer a sintaxe e os recursos da linguagem Kotlin para se trabalhar com funções.
+
+
+==== Definição de funções
+
+No próximo exemplo, definiremos a função `isMultiplo(a, b)`, que retorna _verdadeiro_, se o parâmetro `a` for múltiplo de `b`, ou _falso_ em caso contrário.
+Vamos usar este exemplo para para conhecer a sintaxe de definição de funções.
+
+.Definição e chamada de funções
+[source,kotlin]
+[#exemplo-funcoes]
+----
+fun isMultiplo(a: Int, b: Int): Boolean {  // <1>
+    return (a % b) == 0
+}
+
+fun main() {
+    val res = isMultiplo(24, 3)  // <2>
+    println(res)
+}
+----
+<1> Definição de função: tipos são especificados à direita.
+<2> Chamada de função
+
+Uma função é definida pela palavra `fun`, seguida por seu nome e lista de parâmetros, entre parênteses.
+Logo após, vem o tipo de retorno da função -- `Boolean`, neste caso.
+Por fim, temos o corpo da função especificado entre chaves (`{ }`).
+O comando `return` encerra a execução da função, podendo retornar um valor.
+Se não houver parâmetros, podemos deixar os parênteses vazios. 
+
+Observe que os tipos são indicados à direita dos parâmetros, depois dos sinal de dois pontos -- `a: Int, b: Int`.
+
+
+O corpo de uma função pode conter quantas instruções forem necessárias entre as chaves (`{ }`).
+Mas há casos em que o corpo da função é formado por uma só expressão.
+Pode-se, aí, fazer uma simplicação:
+
+.Funções com corpos de expressão
+[source,kotlin]
+[#exemplo-funcoes-expressao]
+----
+fun isMultiplo(a: Int, b: Int): Boolean = (a % b) == 0
+----
+
+O corpo da função, agora, é a expressão especificada após o sinal de igual (`=`) -- `(a % b) == 0`.
+Observe que a instrução `return` não é mais necessária.
+
+A expressão que define a função pode ser complexa -- formada por uma cadeia de `if/else` ou `when`, por exemplo.
+Vamos retornar ao exemplo <<exemplo-enum>>.
+Dessa vez, vamos definir uma função para extrair o fator de rendimento de cada combustível.
+
+.Expressões complexas como corpos de funções
+[source,kotlin]
+[#exemplo-expressao-complexa]
+----
+enum class Combustivel {
+    ALCOOL, GASOLINA
+}
+
+fun fatorRendimento(combustivel: Combustivel) =
+    when (combustivel) {  // <1>
+        Combustivel.ALCOOL -> 0.7
+        Combustivel.GASOLINA -> 1.0
+    }
+
+fatorRendimento(Combustivel.ALCOOL)  // <2>
+----
+<1> Expressão complexa como corpo da função
+<2> Chamada à função
+
+Observe que o corpo da função agora é uma expressão `when`.
+Veja também que o tipo de retorno da função foi omitido -- linha (5).
+O compilador poderá determinar o tipo de retorno da função por inferência, assim como ocorre com a declaração de variáveis.
+
+
+==== Parâmetros nomeados e valores default
+
+Vejamos mais dois recursos interessantes envolvendo funções: parâmetros nomeados e valores _default_.
+
+Imagine que você queira calcular o consumo de combustível em uma viagem.
+Você conhece o rendimento do seu carro, em Km/L, quando usa gasolina.
+Também sabe que, quando usa álcool, o rendimento cai para 70% desse valor.
+
+Assim, vamos definir uma função que receba:
+
+- distância percorrida;
+- rendimento em Km/L; e
+- combustível usado na viagem. 
+
+A função vai retornar a quantidade de combustível consumida, em litros.
+Como você usa gasolina na maioria das vezes, esse será o valor _default_ do parâmetro combustível.
+Aqui está o código:
+
+
+.Parâmetros nomeados e valores default
+[source,kotlin]
+[#exemplo-parametros-nomeados]
+----
+fun consumoViagem(
+    distancia: Double,
+    rendimento: Double,
+    combustivel: Combustivel = Combustivel.GASOLINA  // <1>
+): Double = distancia / (rendimento * fatorRendimento(combustivel))
+
+consumoViagem(45.0, 15.0)  // <2>
+consumoViagem(45.0, 15.0, Combustivel.ALCOOL)
+consumoViagem(distancia = 90.0, 10.0)  // <3>
+----
+<1> Valor _default_ para o parâmetro `combustivel`
+<2> Ao omitir o parâmetro `combustivel`, assume-se o valor _default_.
+<3> Uso de parâmetro nomeado 
+
+Na primeira chamada da função, vemos que o parâmetro `combustivel` é omitido. Portanto, será assumido o valor _default_, que é gasolina.
+
+Um parâmetro nomeado foi usado na linha (9) para indicar que a distância percorrida foi de 90 Km -- `distancia = 90.0`.
+Esse recurso pode ser usado para aumentar a legibilidade do código-fonte.
+
+Nas chamadas da função `consumoViagem()`, os valores numéricos literais foram escritos com uma casa decimal -- `45.0`, `15.0` e `10.0`.
+Isso é necessário porque a linguagem Kotlin _não faz conversão implícita de tipos_, nem mesmo entre tipos numéricos compatíveis, como inteiro e real.
+O valor literal `10`, escrito dessa forma, levaria o compilador a inferir o tipo `Int`. E este seria incompatível com o tipo `Double`, declarado na função.
+
+Conheceremos mais sobre o sistema de tipos da linguagem Kotlin no capítulo <<ch04-sistema-tipos>>.
+
+
+////
+TODO incluir:
+- Chamadas infixas
+- Funções de extensão
+- Varargs
+- Funções que retornam Unit
+////
+
+[TIP]
+====
+Experimente usar parâmetros nomeados para alterar a ordem dos argumentos nas chamadas de funções.
+Experimente, por exemplo:
+
+----
+consumoViagem(rendimento = 10.0, distancia = 100.0)
+----
+
+Mudar arbitrariamente a ordem dos argumentos em uma chamada de função pode não ser uma boa prática de Engenharia de Software, mas é possível tecnicamente.
+====
+
+
+=== Exceções
+
+Uma exceção é uma condição anormal, que interrompe o fluxo de execução de uma função.
+Exceções podem ser capturadas e tratadas.
+O conceito é o mesmo para qualquer linguagem, mas a política de tratamento de exceções varia de uma linguagem para outra.
+
+A linguagem Java adota a política "tratar ou declarar" (_handle or declare_). 
+Isso significa que exceções devem ser tratadas localmente com `try/catch` ou devem ser explicitamente propagadas por meio de uma declaração `throws`.
+Essa regra se aplica às exceções verificadas (_checked exceptions_), que são a maioria em Java.
+
+A linguagem Kotlin adota uma política diferente:
+
+. É opcional tratar qualquer exceção.
+. Não é preciso declarar as exceções lançadas por uma função.
+// Fonte: KiA [p.76]
+
+Essa visão contribui bastante para reduzir a complexidade do código.
+Em Java, frequentemente somos obrigados a produzir código complexo e verboso, unicamente para atender às regras de tratamento de exceções.
+
+
+==== Lançando exceções
+
+A linguagem Kotlin nos permite lançar exceções ao avaliar uma expressão.
+Vejamos um exemplo.
+Vamos definir a função `converterParaNota()`, que converte uma quantidade de pontos em uma nota de _A+_ até _E_.
+
+.Conversão de pontos para notas
+[source,kotlin]
+[#exemplo-throw-notas]
+----
+fun converterParaNota(pontos: Double): String =
+    if (pontos >= 10.0) "A+"
+    else if (pontos >= 8.0) "A"
+    else if (pontos >= 6.0) "B"
+    else if (pontos >= 4.0) "C"
+    else if (pontos >= 2.0) "D"
+    else if (pontos >= 0.0) "E"
+    else throw IllegalArgumentException("Pontuação inválida!")
+
+fun main() {
+    val nota = converterParaNota(-1.0)
+    println(nota)
+}
+----
+
+Neste exemplo, as notas são classificadas em ordem decrescente.
+Começando pelas pontuações de 10 para cima, depois as de 8,0 para cima (que sejam menores do que 10), as de 6,0 para cima e assim por diante.
+Seguindo essa lógica, vemos que o último ramo `else` será acionado somente em casos de pontuações menores do que zero (negativas).
+E esse problema será sinalizado por meio de uma exceção.
+
+Perceba a ausência do operador `new` após a instrução `throw`.
+Instanciar uma exceção, assim como qualquer outro objeto, não requer esse operador.
+
+Na linguagem Kotlin, a instrução `throw` também é uma expressão, e pode ser usada onde um valor é esperado.
+Porém, o lançamento da exceção interrompe o fluxo normal de execução, fazendo com que nenhum valor válido seja gerado.
+
+[TIP]
+====
+Execute o exemplo <<exemplo-throw-notas>> no Kotlin Playground.
+Experimente diferentes valores como argumento da função `converterParaNota()`.
+====
+
+É claro que `throw` também pode ser usado como uma instrução comum, sem que faça parte de uma expressão.
+Veja um exemplo:
+
+.Tempo de viagem
+[source,kotlin]
+[#exemplo-throw-normal]
+----
+fun tempoViagem(distancia: Double, velocidade: Double): Double {
+    if (distancia < 0 || velocidade < 0)
+        throw IllegalArgumentException("argumento inválido")
+
+    val tempo = distancia / velocidade
+    return tempo
+}
+----
+
+Neste caso, `throw` também interrompe a execução da função, mas não faz parte de nenhuma expressão.
+
+
+==== Capturando exceções 
+
+A principal diferença que temos no tratamento de exceções em Kotlin é que `try` também pode ser usado como uma expressão.
+Veja um caso a seguir.
+
+
+.Conversão de string para data
+[source,kotlin]
+[#exemplo-try-data]
+----
+import java.text.ParseException
+import java.text.SimpleDateFormat
+
+
+val sdf = SimpleDateFormat("dd/MM/yyyy")
+val input = "22/041500"
+
+val date = try {  // <1>
+    sdf.parse(input)
+} catch (e: ParseException) {
+    null
+}
+
+println(date)
+----
+<1> A variável `date` receberá o valor retornado por `try` ou por `catch`.
+
+
+Nesse exemplo, queremos converter uma _string_ em um objeto data.
+O método `parse()` -- que faz a conversão -- pode lançar uma exceção do tipo `ParseException`.
+Poderíamos ignorá-la, já que Kotlin não nos obriga a tratar exceções.
+O programa simplesmente terminaria.
+Mas, em caso de exceção, queremos atribuir `null` à variável `date`.
+
+A instrução `try` -- na linha (8) -- inicia uma expressão.
+Se tudo correr normalmente, a última expressão do bloco `try` será retornada como resultado.
+No entanto, se ocorrer uma exceção, a última expressão do bloco `catch` é que será retornada.
+Ambos os blocos de código -- tanto `try` quanto `catch` -- poderiam conter várias linhas.
+
+O uso de `try` como expressão tende a simplificar o código.
+
+
+[TIP]
+====
+Experimente modificar o código do exemplo <<exemplo-try-data>> para usar um bloco `try-catch` tradicional.
+Compare sua versão com esta que é apresentada no exemplo.
+Quais modificações são necessárias?
+
+====
+
+
+A construção `try-catch-finally` também pode ser usada, assim como em Java.
+Veja um exemplo:
+
+.Listagem de clientes
+[source,kotlin]
+[#exemplo-listar-clientes]
+----
+import java.sql.Connection
+import java.sql.SQLException
+
+fun listarClientes(conn: Connection) {
+    val stmt = conn.createStatement()
+    try {
+        val query = "SELECT id, nome FROM clientes;"
+        val rs = stmt.executeQuery(query)
+        while (rs.next()) {
+            val id = rs.getInt("id")
+            val nome = rs.getString("nome")
+            println("ID: $id - Nome: $nome")
+        }
+        rs.close()
+    } catch (e: SQLException) {
+        e.printStackTrace()
+    } finally {
+        stmt.close()
+    }
+}
+----
+
+Nesse exemplo, temos um caso de uso típico da API JDBC.
+O bloco `catch` captura uma possível `SQLException` enquanto o bloco `finally` faz a liberação de recursos.
+
+Em Kotlin, não existe a estrutura _try-with-resources_, que foi introduzida em Java, na versão 7, para gerenciar recursos.
+A alternativa a essa estrutura é a função link:https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/use.html[use].
+
+// TODO Explicar a função `use`
+
+

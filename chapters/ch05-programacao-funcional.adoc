@@ -1,0 +1,15 @@
+// vim: sts=4 sw=4 expandtab
+[#ch05-programacao-funcional]
+== Programação funcional
+
+////
+TODO conteúdo do capítulo aqui
+////
+
+// === Seção 1
+
+// === Seção 2
+
+====
+Capítulo em elaboração
+====

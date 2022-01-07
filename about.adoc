@@ -1,0 +1,47 @@
+// vim: sts=4 sw=4 expandtab
+
+== Sobre este material
+:sectnums!:
+
+Este material foi escrito para programadores Java que querem conhecer a linguagem Kotlin.
+
+
+=== Objetivos
+
+Buscamos alcançar os seguites objetivos com este material:
+
+. Ser um texto de leitura rápida.
+. Ser informativo.
+. Permitir que o leitor pratique o uso da linguagem Kotlin assim que começar a leitura.
+
+
+Para isso, estabelecemos os seguintes requisitos:
+
+* Transmitir informação por meio de exemplos.
+* Cortar detalhes que não sejam essenciais.
+* Minimizar o volume de texto.
+* Aproveitar o conhecimento do leitor sobre Java. (É um material para quem conhece Java.)
+* Conter exercícios.
+
+
+=== Escopo
+
+O conteúdo cobre os seguintes tópicos:
+
+* Mecanismos básicos da linguagem Kotlin (variáveis, controle de fluxo, etc.)
+* Declaração e chamada de funções
+* Sistema de tipos da linguagem
+* Orientação a objetos
+* Lambdas e programação funcional
+
+
+=== Licença
+
+Este material está disponível sob os termos da licença Creative Commons link:http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1[CC BY-NC 4.0].
+
+
+=== Contato
+
+Entre em contato preenchendo link:https://forms.gle/FTwaMW2t1nnFT3Zx9[este formulário].
+
+

@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="description" content="Uma introdução rápida à Linguagem Kotlin para programadores Java">
+<meta name="author" content="Marcelo Criscuolo">
+<title>Kotlin Essencial</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Fira+Sans:wght@300&display=swap');
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+code, pre {
+        font-family: 'Fira Mono', monospace;
+}
+
+.admonitionblock td.icon .icon-tip::before {
+	/* content: "\1F4A1"; */
+	content: "\1F9EA";
+}
+
+div#license {
+        font-family: 'Fira Sans', sans-serif;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GDGTT4VDF4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GDGTT4VDF4');
+</script>
+
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Kotlin Essencial</h1>
+<div class="details">
+<span id="author" class="author">Marcelo Criscuolo</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Conteúdo</div>
+<ul class="sectlevel1">
+<li><a href="#ch01-introducao">1. Introdução</a>
+<ul class="sectlevel2">
+<li><a href="#_primeiro_contato">1.1. Primeiro contato</a></li>
+<li><a href="#_executando_seus_programas">1.2. Executando seus programas</a></li>
+<li><a href="#_declarando_variáveis">1.3. Declarando variáveis</a></li>
+<li><a href="#_lendo_dados_do_teclado">1.4. Lendo dados do teclado</a></li>
+<li><a href="#_objetos_e_programação_funcional">1.5. Objetos e programação funcional</a></li>
+<li><a href="#sec-origens-linguagem">1.6. Origens da linguagem</a></li>
+<li><a href="#_documentação_e_manual_da_api">1.7. Documentação e manual da API</a></li>
+</ul>
+</li>
+<li><a href="#ch02-estruturas-basicas">2. Estruturas básicas</a>
+<ul class="sectlevel2">
+<li><a href="#_condições">2.1. Condições</a></li>
+<li><a href="#_repetição">2.2. Repetição</a></li>
+<li><a href="#_funções">2.3. Funções</a></li>
+<li><a href="#_exceções">2.4. Exceções</a></li>
+</ul>
+</li>
+<li><a href="#ch03-objetos-heranca">3. Objetos e herança</a></li>
+<li><a href="#ch04-sistema-tipos">4. Sistema de tipos</a></li>
+<li><a href="#ch05-programacao-funcional">5. Programação funcional</a></li>
+<li><a href="#_sobre_este_material">6. Sobre este material</a>
+<ul class="sectlevel2">
+<li><a href="#_objetivos">Objetivos</a></li>
+<li><a href="#_escopo">Escopo</a></li>
+<li><a href="#_licença">Licença</a></li>
+<li><a href="#_contato">Contato</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>O essencial sobre Kotlin para programadores Java.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ch01-introducao"><a class="link" href="#ch01-introducao">1. Introdução</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Neste capítulo, você será apresentado à linguagem Kotlin.
+Você vai conhecer as características da linguagem&#8201;&#8212;&#8201;incluindo sintaxe e principais recursos&#8201;&#8212;&#8201;, suas origens, ferramentas de desenvolvimento, modelo de execução e relação com a linguagem Java.</p>
+</div>
+<div class="sect2">
+<h3 id="_primeiro_contato"><a class="link" href="#_primeiro_contato">1.1. Primeiro contato</a></h3>
+<div class="paragraph">
+<p>Vamos começar com um vôo de reconhecimento.
+Veja exemplo a seguir.</p>
+</div>
+<div id="example-hello" class="listingblock">
+<div class="title">Olá mundo</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">name</span> <span class="tok-o">=</span> <span class="tok-s">&quot;mundo&quot;</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Olá, </span><span class="tok-si">$</span><span class="tok-n">name</span><span class="tok-s">!&quot;</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Neste pequeno programa, você pode perceber que:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A linguagem Kotlin não requer ponto-e-vírgula (<code>;</code>) nos finais de linha.</p>
+</li>
+<li>
+<p>O ponto de entrada de um programa é a função <code>main()</code>&#8201;&#8212;&#8201;assim como em Java.</p>
+</li>
+<li>
+<p>A função <code>main()</code> é um elemento de nível superior&#8201;&#8212;&#8201;isto é, não precisa estar dentro de uma classe.</p>
+</li>
+<li>
+<p>A função <code>println()</code> é chamada diretamente (sem <code>System.out</code>).</p>
+</li>
+<li>
+<p>A linguagem tem suporte a <em>templates</em> de <em>string</em>&#8201;&#8212;&#8201;ou seja, nomes de variáveis (prefixados por <code>$</code>) podem ser inseridos entre aspas, como em:  <code>"Olá, $name!"</code> &#8594; "Olá, mundo!".</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>No exemplo <a href="#example-hello">Olá mundo</a>, ainda aparecem duas palavras reservadas importantes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fun</code>: define uma função.</p>
+</li>
+<li>
+<p><code>val</code>: dá nome a um valor imutável.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Um valor imutável&#8201;&#8212;&#8201;declarado com <code>val</code>&#8201;&#8212;&#8201;é como uma variável marcada com o modificador <code>final</code> em Java.
+Após a atribuição inicial, seu valor não pode mais ser alterado.
+Há também a palavra <code>var</code>, que permite declarar variáveis que podem ser alteradas.
+Porém, em Kotlin, <em>prefere-se usar valores imutáveis</em>, sempre que for possível.</p>
+</div>
+<div class="paragraph">
+<p>Essa preferência é uma das características da linguagem Kotlin que foram inspiradas em linguagens funcionais&#8201;&#8212;&#8201;como Haskell e LISP, por exemplo.
+Na verdade, seu <em>design</em> foi influenciado por várias linguagens.
+É fácil reconhecer, em Kotlin, características de linguagens como Python, Groovy, Pascal e&#8201;&#8212;&#8201;obviamente&#8201;&#8212;&#8201;Java.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_executando_seus_programas"><a class="link" href="#_executando_seus_programas">1.2. Executando seus programas</a></h3>
+<div class="paragraph">
+<p>Já podemos executar nosso primeiro programa.
+Há várias maneiras de se executar um código-fonte escrito em Kotlin.
+Vejamos.</p>
+</div>
+<div class="sect3">
+<h4 id="_kotlin_playground_online"><a class="link" href="#_kotlin_playground_online">1.2.1. Kotlin Playground (online)</a></h4>
+<div class="paragraph">
+<p>A alternativa mais simples para se executar um código-fonte escrito em Kotlin é usar o serviço <em>online</em> Kotlin Playground, disponível no <em>site</em> da linguagem.
+Vamos usá-lo para executar o código do exemplo <a href="#example-hello">Olá mundo</a>.
+Siga estes passos:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Selecione e copie o código contido no exemplo <a href="#example-hello">Olá mundo</a>.</p>
+</li>
+<li>
+<p>Em uma nova aba, abra o Kotlin Playground, pela URL: <a href="https://play.kotlinlang.org/" class="bare">play.kotlinlang.org/</a></p>
+</li>
+<li>
+<p>Remova qualquer código contido no editor do <em>playground</em>.</p>
+</li>
+<li>
+<p>Cole o código do nosso exemplo.</p>
+</li>
+<li>
+<p>Clique no botão <em>Run</em>, no canto superior direito da tela.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>O resultado está ilustrado na figura a seguir (<a href="#img-playground">Executando código-fonte no Kotlin Playground</a>).</p>
+</div>
+<div id="img-playground" class="imageblock">
+<div class="content">
+<img src="images/ch01/playground.png" alt="Kotlin Playground" width="50%">
+</div>
+<div class="title">Figura 1. Executando código-fonte no Kotlin Playground</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ambientes_de_desenvolvimento_computador_local"><a class="link" href="#_ambientes_de_desenvolvimento_computador_local">1.2.2. Ambientes de desenvolvimento (computador local)</a></h4>
+<div class="paragraph">
+<p>Outra alternativa é usar seu computador local para desenvolver e executar programas em Kotlin.
+Existem vários ambientes de desenvolvimento disponíveis.
+Uma opção é usar o compilador de linha de comando em conjunto com qualquer editor de textos&#8201;&#8212;&#8201;como Notepad++, Vim ou algum outro.</p>
+</div>
+<div class="paragraph">
+<p>No entanto, é mais prático usar um ambiente de desenvolvimento integrado (IDE), como o Eclipse ou IntelliJ IDEA.
+Ambos contam com <em>plugins</em> para se trabalhar com Kotlin.</p>
+</div>
+<div class="paragraph">
+<p>Instruções sobre o uso de cada uma dessas opções podem ser encontradas nos endereços a seguir:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Linha de comando:
+<a href="https://kotlinlang.org/docs/command-line.html" class="bare">kotlinlang.org/docs/command-line.html</a></p>
+</li>
+<li>
+<p>Eclipse IDE:
+<a href="https://kotlinlang.org/docs/eclipse.html" class="bare">kotlinlang.org/docs/eclipse.html</a></p>
+</li>
+<li>
+<p>IntelliJ IDEA:
+<a href="https://kotlinlang.org/docs/run-code-snippets.html" class="bare">kotlinlang.org/docs/run-code-snippets.html</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Aqui usaremos o IntelliJ IDEA, que oferece o suporte mais completo à linguagem Kotlin, incluindo recursos de auto-completar e refatoração.
+Usaremos, principalmente, o recurso <em>Scratch Editor</em> (Editor de Rascunhos).
+Esse recurso nos permite escrever e executar código-fonte por meio de um arquivo temporário.
+Assim, podemos fazer experiências, escrevendo pequenos trechos de código para compreender o funcionamento da linguagem.</p>
+</div>
+<div class="paragraph">
+<p>Os arquivos temporários criados no editor de rascunhos são chamados de <em>scratch files</em> (arquivos de rascunho).
+Para usá-los, primeiro é preciso criar um Projeto Kotlin no IntelliJ.
+Use as seguintes opções do menu principal: <strong>File &#8594; New &#8594; Project &#8230;&#8203;</strong>.
+Em seguida, você poderá criar um arquivo de rascunhos, usando as opções <strong>File &#8594; New &#8594; Scratch File</strong>
+(veja a figura a seguir: <a href="#img-new-scratch">Como criar um novo arquivo de rascunho</a>).</p>
+</div>
+<div id="img-new-scratch" class="imageblock">
+<div class="content">
+<img src="images/ch01/idea-new-scratch.png" alt="Novo Scratch File" width="70%">
+</div>
+<div class="title">Figura 2. Como criar um novo arquivo de rascunho</div>
+</div>
+<div id="img-scratch-example" class="imageblock">
+<div class="content">
+<img src="images/ch01/idea-scratch-example.png" alt="Exemplo Scratch File" width="70%">
+</div>
+<div class="title">Figura 3. Exemplo de arquivo de rascunho</div>
+</div>
+<div class="paragraph">
+<p>Observe agora a figura <a href="#img-scratch-example">Exemplo de arquivo de rascunho</a>.
+Temos ali um pequeno programa que calcula a área de um círculo.
+Observe, no painel do lado direito, o resultado da execução de cada linha de código.
+Veja também que, neste caso, não foi preciso criar um método <code>main()</code>.
+Isso ocorre porque os arquivos de rascunho são executados como <em>scripts</em>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_arquivos_fonte_vs_scripts"><a class="link" href="#_arquivos_fonte_vs_scripts">1.2.3. Arquivos-fonte vs scripts</a></h4>
+<div class="paragraph">
+<p>Há uma diferença sutil entre arquivos-fonte (<code>*.kt</code>) e arquivos de <em>script</em> (<code>*.kts</code>).
+Enquanto um arquivo-fonte é destinado à definição de elementos como classes e funções, que são usados posteriormente, um <em>script</em> é um arquivo que contém código destinado à execução imediata.
+<em>Scripts</em> são usados principalmente para automatizar tarefas.
+Você pode saber mais sobre <em>scripts</em> consultando a <a href="https://kotlinlang.org/docs/command-line.html#run-scripts">documentação da linguagem</a>.</p>
+</div>
+<div class="paragraph">
+<p>Na prática, podemos considerar que os arquivos-fonte (<code>*.kt</code>) requerem uma função <code>main()</code> como ponto de entrada do programa, enquanto nos arquivos de <em>script</em> isso não é necessário.
+Se você tentar executar um arquivo-fonte sem definir uma função <code>main()</code>, o compilador exibirá a mensagem de erro: <em>"Expecting a top level declaration"</em>.</p>
+</div>
+<div class="paragraph">
+<p>O ambiente <em>online</em> Kotlin Playground usa arquivos-fonte.
+Portanto, você sempre precisará definir uma função <code>main()</code>.
+Para executar o mesmo código nos arquivos de rascunho do IntelliJ (<em>scripts</em>), basta remover a declaração <code>fun main() {</code> e também a chave (<code>}</code>) na última linha, deixando apenas o corpo da função.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_declarando_variáveis"><a class="link" href="#_declarando_variáveis">1.3. Declarando variáveis</a></h3>
+<div class="paragraph">
+<p>Suponha que você queira declarar dois valores imutáveis e um variável em Java.
+Os tipos devem ser <code>double</code>, <code>String</code> e <code>int</code>.
+O código-fonte ficaria assim:</p>
+</div>
+<div id="variaveis-java" class="listingblock">
+<div class="title">Declaração de valores em Java</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">final</span> <span class="tok-kt">double</span> <span class="tok-n">x</span> <span class="tok-o">=</span> <span class="tok-mf">2.5</span><span class="tok-p">;</span>
+<span class="tok-kd">final</span> <span class="tok-n">String</span> <span class="tok-n">produto</span> <span class="tok-o">=</span> <span class="tok-s">&quot;caneta&quot;</span><span class="tok-p">;</span>
+<span class="tok-kt">int</span> <span class="tok-n">y</span> <span class="tok-o">=</span> <span class="tok-mi">10</span><span class="tok-p">;</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vimos que, em Kotlin, variáveis e valores imutáveis são declarados por <code>var</code> e <code>val</code>, respectivamente.
+Então, o mesmo resultado seria obtido por meio do seguinte código:</p>
+</div>
+<div id="variaveis-kotlin" class="listingblock">
+<div class="title">Declaração de valores em Kotlin</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">x</span> <span class="tok-o">=</span> <span class="tok-m">2.5</span>
+<span class="tok-kd">val</span> <span class="tok-nv">produto</span> <span class="tok-o">=</span> <span class="tok-s">&quot;caneta&quot;</span>
+<span class="tok-kd">var</span> <span class="tok-nv">y</span> <span class="tok-o">=</span> <span class="tok-m">10</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nesse último exemplo, deve chamar a atenção a falta de especificadores de tipos&#8201;&#8212;&#8201;como <code>Double</code>, <code>String</code> e <code>Int</code>.
+Contudo, ao executar esse código em um arquivo de rascunho do IntelliJ, verificamos que o compilador identifica corretamente os tipos de cada valor. Veja a figura:</p>
+</div>
+<div id="img-scratch-types" class="imageblock">
+<div class="content">
+<img src="images/ch01/scratch-types.png" alt="Inferência de tipos" width="75%">
+</div>
+<div class="title">Figura 4. Inferência de tipos</div>
+</div>
+<div class="paragraph">
+<p>Um dos recursos marcantes de Kotlin é a inferência de tipos.
+Isso significa que o compilador identifica os tipos de variáveis a partir do contexto de uso.
+Por exemplo, ao encontrar o valor <code>2.5</code>, o compilador deduz (infere) que seu tipo é <code>Double</code>.
+Dessa maneira, todos os valores têm um tipo associado, mesmo que esse tipo não seja explicitamente declarado.</p>
+</div>
+<div class="paragraph">
+<p>O recurso de inferência não impede que os tipos sejam declarados explicitamente.
+Para declarar um tipo, você deve indicá-lo <em>após o nome da variável</em> precedido pelo sinal de dois pontos (<code>:</code>).
+Veja um exemplo.</p>
+</div>
+<div id="variaveis-kotlin-tipos" class="listingblock">
+<div class="title">Valores com tipos declarados</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">x</span><span class="tok-p">:</span> <span class="tok-kt">Double</span> <span class="tok-o">=</span> <span class="tok-m">2.5</span>
+<span class="tok-kd">val</span> <span class="tok-nv">produto</span><span class="tok-p">:</span> <span class="tok-kt">String</span> <span class="tok-o">=</span> <span class="tok-s">&quot;caneta&quot;</span>
+<span class="tok-kd">var</span> <span class="tok-nv">y</span><span class="tok-p">:</span> <span class="tok-kt">Int</span> <span class="tok-o">=</span> <span class="tok-m">10</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Execute o código do exemplo <a href="#variaveis-kotlin-tipos">Valores com tipos declarados</a> em um arquivo de rascunhos (Scratch Editor) do IntelliJ.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Experimente alterar o valor de <code>"caneta"</code> para <code>3</code>, sem mudar o tipo <code>String</code>.
+Em seguida, repita esse procedimento removendo a declaração do tipo.</p>
+</li>
+<li>
+<p>Experimente alterar o valor de <code>2.5</code> para <code>2</code>, mantendo a especificação do tipo <code>Double</code>.
+Por quê o compilador indica um erro após essa alteração?</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lendo_dados_do_teclado"><a class="link" href="#_lendo_dados_do_teclado">1.4. Lendo dados do teclado</a></h3>
+<div class="paragraph">
+<p>No próximo exemplo, vamos ver como ler dados do teclado.</p>
+</div>
+<div id="uri-1002" class="listingblock">
+<div class="title">Leitura de dados do teclado</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">const</span> <span class="tok-kd">val</span> <span class="tok-nv">PI</span> <span class="tok-o">=</span> <span class="tok-m">3.14159</span>   <span class="tok-c1">// definição de PI</span>
+
+<span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+<span class="hll">    <span class="tok-kd">val</span> <span class="tok-nv">raio</span> <span class="tok-o">=</span> <span class="tok-n">readLine</span><span class="tok-p">()</span><span class="tok-o">!!</span><span class="tok-p">.</span><span class="tok-na">toDouble</span><span class="tok-p">()</span>
+</span>    <span class="tok-kd">val</span> <span class="tok-nv">area</span> <span class="tok-o">=</span> <span class="tok-n">PI</span> <span class="tok-o">*</span> <span class="tok-n">raio</span> <span class="tok-o">*</span> <span class="tok-n">raio</span>
+
+    <span class="tok-cm">/*</span>
+<span class="tok-cm">       Exibindo o resultado formatado</span>
+<span class="tok-cm">       com 4 casas decimais</span>
+<span class="tok-cm">     */</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;A=%.4f&quot;</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-n">area</span><span class="tok-p">))</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A função <code>readLine()</code> lê uma linha de texto do teclado e retorna um valor do tipo <code>String</code>.
+O método <code>toDouble()</code> converte um objeto do tipo <code>String</code> para um valor numérico do tipo <code>Double</code>.
+O operador <code>!!</code>&#8201;&#8212;&#8201;antes da chamada a <code>toDouble()</code>&#8201;&#8212;&#8201;força o lançamento de uma exceção se, por acaso, o método <code>readLine()</code> retornar o valor <code>null</code>. (Veremos mais sobre valores nulos e o operador <code>!!</code> no capítulo <a href="#ch04-sistema-tipos">Sistema de tipos</a>).</p>
+</div>
+<div class="paragraph">
+<p>A expressão <code>const val</code>&#8201;&#8212;&#8201;linha (1)&#8201;&#8212;&#8201;define uma <a href="https://kotlinlang.org/docs/properties.html#compile-time-constants">constante em tempo de compilação</a>.
+Uma constante é diferente de um valor imutável&#8201;&#8212;&#8201;declarado com <code>val</code>&#8201;&#8212;&#8201;, pois o valor da constante é conhecido em tempo de compilação.
+É algo semelhante ao que acontece com a macro <code>#define</code>, da linguagem C, ou com o modificador <code>constexpr</code>, de C++.
+Além de tornar o código mais legível, o modificador <code>const</code> permite que o compilador faça otimizações.</p>
+</div>
+<div class="paragraph">
+<p>Neste exemplo, também usamos o método <code>format()</code>&#8201;&#8212;&#8201;linha (11)&#8201;&#8212;&#8201;para formatar o valor de ponto flutuante <code>area</code> com 4 casas decimais.
+Kotlin usa a biblioteca padrão da linguagem Java.
+Portanto, esse é o método <code>format()</code> da classe <code>java.lang.String</code>, exatamente como está documentado na <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html">espeficação da API Java</a>.</p>
+</div>
+<div class="paragraph">
+<p>Finalmente, ainda ocorrem, neste exemplo, duas formas de comentários:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Comentários de múltiplas linhas, marcados por <code>/* */</code>&#8201;&#8212;&#8201;nas linhas de 7 a 10.</p>
+</li>
+<li>
+<p>Comentários de linha única, marcados por <code>//</code>&#8201;&#8212;&#8201;na linha 1.</p>
+</li>
+</ul>
+</div>
+<div id="programacao-competitiva" class="sidebarblock">
+<div class="content">
+<div class="title">Kotlin em competições de programação</div>
+<div class="paragraph">
+<p>Em competições de programação, vence o programador que resolver corretamente o maior número de problemas, no menor tempo possível.
+As respostas podem ser desenvolvidas em várias linguagens de programação e a correção é automática.
+Há diversos <em>sites</em> para prática da programação competitiva.
+Esses <em>sites</em> hospedam coletâneas de problemas de programação e fornecem sistemas para correção das respostas (<em>judges</em>).</p>
+</div>
+<div class="paragraph">
+<p>A linguagem Kotlin está entre as linguagens de programação aceitas por alguns <em>judges</em>.
+O exemplo <a href="#uri-1002">Leitura de dados do teclado</a>, por exemplo, é a solução para o problema <a href="https://www.beecrowd.com.br/judge/pt/problems/view/1002">Área do Círculo</a>, disponível no <em>site</em> brasileiro <a href="https://www.beecrowd.com.br">beecrowd</a>.</p>
+</div>
+<div class="paragraph">
+<p>Também há <a href="https://kotlinlang.org/docs/competitive-programming.html">uma página</a> dedicada à programação competitiva na documentação da linguagem Kotlin.
+Nessa página você encontrará uma compilação de técnicas de programação normalmente usadas em competições&#8201;&#8212;&#8201;como ler dois inteiros separados por espaços, por exemplo.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_objetos_e_programação_funcional"><a class="link" href="#_objetos_e_programação_funcional">1.5. Objetos e programação funcional</a></h3>
+<div class="paragraph">
+<p>Kotlin combina recursos dos paradigmas de programação orientado a objetos e funcional.
+Nesta seção, conheceremos mais alguns recursos da linguagem por meio de um exemplo de cada um desses paradigmas.</p>
+</div>
+<div class="sect3">
+<h4 id="_programação_orientada_a_objetos"><a class="link" href="#_programação_orientada_a_objetos">1.5.1. Programação orientada a objetos</a></h4>
+<div class="paragraph">
+<p>No exemplo <a href="#exemplo-classes">Classes e objetos</a>, a seguir, temos a definição de uma classe, seguida pela criação de duas instâncias.</p>
+</div>
+<div id="exemplo-classes" class="listingblock">
+<div class="title">Classes e objetos</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">class</span> <span class="tok-nc">Produto</span><span class="tok-p">(</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">nome</span><span class="tok-p">:</span> <span class="tok-kt">String</span><span class="tok-p">,</span>
+    <span class="tok-kd">var</span> <span class="tok-nv">preco</span><span class="tok-p">:</span> <span class="tok-kt">Double</span><span class="tok-p">,</span>
+    <span class="tok-kd">var</span> <span class="tok-nv">isPromocao</span><span class="tok-p">:</span> <span class="tok-kt">Boolean</span> <span class="tok-o">=</span> <span class="tok-kc">false</span><span class="tok-p">,</span>    <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="tok-p">)</span>
+
+
+<span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">p1</span> <span class="tok-o">=</span> <span class="tok-n">Produto</span><span class="tok-p">(</span><span class="tok-s">&quot;caderno&quot;</span><span class="tok-p">,</span> <span class="tok-m">8.50</span><span class="tok-p">)</span>    <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="tok-kd">val</span> <span class="tok-nv">p2</span> <span class="tok-o">=</span> <span class="tok-n">Produto</span><span class="tok-p">(</span><span class="tok-s">&quot;caneta&quot;</span><span class="tok-p">,</span> <span class="tok-m">1.10</span><span class="tok-p">,</span> <span class="tok-kc">true</span><span class="tok-p">)</span>
+
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Produto: </span><span class="tok-si">${</span><span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-na">nome</span><span class="tok-si">}</span><span class="tok-s"> - </span><span class="tok-si">${</span><span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-na">preco</span><span class="tok-si">}</span><span class="tok-s">&quot;</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Propriedade com valor padrão (<em>default</em>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Criação de objeto: assumindo o valor <em>default</em> da propriedade <code>isPromocao</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Observe que os atributos&#8201;&#8212;&#8201;<code>nome</code>, <code>preco</code> e <code>isPromocao</code>&#8201;&#8212;&#8201;são definidos entre parênteses, logo após o nome da classe <code>Produto</code>.
+Os tipos são definidos após os nomes, precedidos por um sinal de dois pontos (<code>:</code>).
+O atributo <code>isPromocao</code>, do tipo <code>Boolean</code>, tem um valor padrão (<code>false</code>).
+Isso o torna opcional especificá-lo no construtor.</p>
+</div>
+<div class="paragraph">
+<p>Veja que, enquanto o atributo <code>nome</code> é especificado com a palavra <code>val</code>, os demais são especificados por <code>var</code>.
+Isso implica que <code>nome</code> é um atributo somente-leitura.
+Uma vez criado um objeto, esse atributo não poderá mais ser alterado.</p>
+</div>
+<div class="paragraph">
+<p>Perceba ainda que a classe <code>Produto</code> não tem um corpo definindo construtor e métodos <code>get</code>/<code>set</code>.
+Tudo isso é gerado automaticamente.</p>
+</div>
+<div class="paragraph">
+<p>Na função <code>main()</code>, são criadas duas instâncias de produto: <code>p1</code> e <code>p2</code>.
+Perceba a ausência da palavra <code>new</code>.
+Para criar instâncias de objetos, basta chamar o nome da classe, seguido pela lista de atributos entre parênteses.
+Atributos com valor <em>default</em> podem ser omitidos.</p>
+</div>
+<div class="paragraph">
+<p>Finalmente, observe, na última linha, a composição de uma <em>string</em> contendo nome e preço de um produto.
+Nesse caso, além do cifrão (<code>$</code>), foi preciso especificar a expressão entre chaves (<code>${p1.preco}</code>) devido à presença do ponto (<code>.</code>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Experimente executar o exemplo <a href="#exemplo-classes">Classes e objetos</a> no <a href="https://play.kotlinlang.org/">Kotlin Playground</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Com este exemplo, pudemos ter uma ideia inicial dos recursos de Kotlin para programação orientada a objetos.
+Vejamos agora um exemplo envolvendo o paradigma funcional.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programação_funcional"><a class="link" href="#_programação_funcional">1.5.2. Programação funcional</a></h4>
+<div class="paragraph">
+<p>Suponha que você precise desenvolver um programa que receba uma lista de palavras e encontre a palavra mais longa entre aquelas que começarem com a letra "a".
+Veja uma solução para esse problema no exemplo a seguir.</p>
+</div>
+<div id="exemplo-fp" class="listingblock">
+<div class="title">Programação funcional</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">palavras</span> <span class="tok-o">=</span> <span class="tok-n">listOf</span><span class="tok-p">(</span><span class="tok-s">&quot;alho&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;cenoura&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;alface&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;cebola&quot;</span><span class="tok-p">)</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">maisLonga</span> <span class="tok-o">=</span> <span class="tok-n">palavras</span>
+        <span class="tok-p">.</span><span class="tok-na">filter</span> <span class="tok-p">{</span> <span class="tok-nb">it</span><span class="tok-p">.</span><span class="tok-na">startsWith</span><span class="tok-p">(</span><span class="tok-s">&quot;a&quot;</span><span class="tok-p">)</span> <span class="tok-p">}</span>
+        <span class="tok-p">.</span><span class="tok-na">maxByOrNull</span> <span class="tok-p">{</span> <span class="tok-nb">it</span><span class="tok-p">.</span><span class="tok-na">length</span> <span class="tok-p">}</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Palavra mais longa: </span><span class="tok-si">$</span><span class="tok-n">maisLonga</span><span class="tok-s">&quot;</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>O método <code>filter</code> gera uma nova lista, contendo apenas as palavras que começam com a letra "a".
+O método <code>maxByOrNull</code> é aplicado a essa nova lista, retornando a <em>string</em> com o maior comprimento (<code>length</code>) ou <code>null</code>, se por acaso a lista estiver vazia.</p>
+</div>
+<div class="paragraph">
+<p>Imagine como seria obter o mesmo resultado usando o paradigma imperativo, combinando estruturas <code>for</code> e <code>if</code>.
+O paradigma funcional nos permite desenvolver facilmente uma solução bastante concisa.
+Na verdade, essa abordagem não é uma exclusividade da linguagem Kotlin.
+Podemos obter resultado semelhante usando a <a href="https://www.oracle.com/br/technical-resources/articles/java-stream-api.html">Stream API</a>, da linguagem Java.
+Contudo, usar o paradigma funcional é bastante fácil em Kotlin, pois esses recursos são parte da própria linguagem.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Execute o exemplo <a href="#exemplo-fp">Programação funcional</a> no Kotlin Playground ou em seu ambiente de desenvolvimento.
+Faça as seguintes experiências:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Remova a linha contendo a chamada ao método <code>filter</code> e observe o resultado do programa.</p>
+</li>
+<li>
+<p>Agora, ponha de volta a linha contendo <code>filter</code> e remova da lista as palavras que começam com "a".</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Estudaremos mais sobre os recursos de Kotlin para o paradigma orientado a objetos e o para o paradigma funcional nos capítulos <a href="#ch03-objetos-heranca">Objetos e herança</a> e <a href="#ch05-programacao-funcional">Programação funcional</a>, respectivamente.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec-origens-linguagem"><a class="link" href="#sec-origens-linguagem">1.6. Origens da linguagem</a></h3>
+<div class="paragraph">
+<p>Agora que já conhecemos alguns aspectos técnicos da linguagem Kotlin, vamos falar sobre suas origens.</p>
+</div>
+<div class="paragraph">
+<p>Kotlin foi criada para ser uma alternativa à linguagem Java.
+Seus criadores buscavam desenvolver uma linguagem mais concisa, mais produtiva e mais segura do que Java, mas que pudesse ser usada nos mesmos contextos.
+Aqui, "segura" se refere a erros em tempo de execução, como os erros de ponteiro nulo.
+Para atingir o objetivo de ser mais segura, Kotlin conta com um forte sistema de tipagem estática&#8201;&#8212;&#8201;ao que tudo indica, inspirado na <a href="https://www.haskell.org/">linguagem Haskell</a>.</p>
+</div>
+<div class="paragraph">
+<p>A linguagem foi criada pela empresa JetBrains no ano de 2010, tendo sua primeira versão foi publicada no ano de 2016.
+Desde o início, é desenvolvida como um projeto <em>open source</em>, com código-fonte publicado na plataforma GitHub.
+Ferramentas de desenvolvimento, como compiladores e ambientes integrados (IDEs) podem ser obtidos gratuitamente.
+IntelliJ IDEA e Android Studio são os principais ambientes de desenvolvimento.
+Também há um <em>plugin</em> para o Eclipse.</p>
+</div>
+<div class="paragraph">
+<p>Desde 2019, <a href="https://developer.android.com/kotlin/first">Kotlin é a linguagem recomendada pela Google</a> para o desenvolvimento de aplicativos Android, substituindo a linguagem Java.
+Kotlin também pode ser usada no lugar da linguagem Java para o desenvolvimento de software nas plataformas <em>web</em> e <em>desktop</em>.</p>
+</div>
+<div class="sect3">
+<h4 id="_kotlin_e_a_plataforma_java"><a class="link" href="#_kotlin_e_a_plataforma_java">1.6.1. Kotlin e a plataforma Java</a></h4>
+<div class="paragraph">
+<p>Kotlin foi projetada para ter total interoperabilidade com Java.
+Objetos definidos em uma linguagem podem ser acessados a partir da outra de maneira transparente.</p>
+</div>
+<div class="paragraph">
+<p>Kotlin é compilada para <em>bytecode</em>.
+Logo, para a máquina virtual (JVM), não há diferença entre objetos escritos em Kotlin e objetos escritos em Java.
+Isso permite, por exemplo, que em um mesmo projeto, tenhamos código escrito nas duas linguagens.
+A compilação para <em>bytecode</em> também permite que Kotlin seja executada de maneira transparente pela máquina virtual do sistema Android.</p>
+</div>
+<div class="paragraph">
+<p>Outra consequência natural da compilação para <em>bytecode</em> é o acesso a qualquer biblioteca desenvolvida em Java.
+Kotlin pode acessar as bibliotecas do sistema Android, implementar interfaces do <em>Spring Framework</em> ou acessar uma classe do pacote <code>java.util</code> sem dificuldades.</p>
+</div>
+<div class="paragraph">
+<p>Na verdade, a ligação com a plataforma Java é bastante forte.
+A linguagem Kotlin não possui uma biblioteca padrão própria.
+Kotlin usa e estende as funcionalidades da biblioteca padrão Java.
+As interfaces e as implementações do <em>framework</em> de coleções, por exemplo, são as mesmas da biblioteca padrão Java.</p>
+</div>
+<div class="paragraph">
+<p>Além de executar o código Kotlin na JVM, também é possível traduzi-lo para JavaScript, para ser executado em ambiente <em>frontend Web</em>.
+É possível, inclusive, gerar código executável nativo para ser executado diretamente pelo sistema operacional.</p>
+</div>
+<div class="paragraph">
+<p>No entanto, Java é a principal plataforma para execução de aplicativos desenvolvidos em Kotlin.
+Um aplicativo Kotlin é uma combinação do código-fonte&#8201;&#8212;&#8201;compilado para <em>bytecode</em>&#8201;&#8212;&#8201;com as classes da biblioteca padrão Java e a biblioteca de extensões de Kotlin (<em>Kotlin runtime</em>). Tudo isso sendo executado sobre a JVM.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_documentação_e_manual_da_api"><a class="link" href="#_documentação_e_manual_da_api">1.7. Documentação e manual da API</a></h3>
+<div class="paragraph">
+<p>O <em>site</em> da linguagem Kotlin está hospedado do endereço <a href="https://kotlinlang.org" class="bare">kotlinlang.org</a>.
+Na seção <a href="https://kotlinlang.org/docs/home.html">Docs</a>, você encontrará materiais de estudo, como tutoriais e exemplos.
+Também na seção Docs, você encontrará o manual de referência da API da linguagem  (<em>link</em> "API reference") onde estão documentadas suas funções próprias, assim como as extensões de Kotlin para a biblioteca padrão da linguagem Java.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ch02-estruturas-basicas"><a class="link" href="#ch02-estruturas-basicas">2. Estruturas básicas</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Neste capítulo, estudaremos as estruturas básicas da linguagem Kotlin.
+Começaremos com estruturas condicionais.
+Em seguida, veremos as estruturas de repetição e de iteração.
+Depois estudaremos os mecanismos de tratamento de exceções e, finalmente, estudaremos as funções.</p>
+</div>
+<div class="sect2">
+<h3 id="_condições"><a class="link" href="#_condições">2.1. Condições</a></h3>
+<div class="paragraph">
+<p>Aqui conheceremos os comandos <code>if</code> e <code>when</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="_comando_if"><a class="link" href="#_comando_if">2.1.1. Comando if</a></h4>
+<div class="paragraph">
+<p>Imagine que uma loja oferece um desconto de 5% para compras acima de R$ 20,00.
+Essa política pode ser implementada por um comando <code>if</code>, da seguinte maneira:</p>
+</div>
+<div id="exemplo-desconto-1" class="listingblock">
+<div class="title">Política de descontos</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">total</span> <span class="tok-o">=</span> <span class="tok-m">23.0</span>
+
+<span class="tok-kd">var</span> <span class="tok-nv">porcentagem</span><span class="tok-p">:</span> <span class="tok-kt">Double</span>    <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">total</span> <span class="tok-o">&gt;</span> <span class="tok-m">20</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-n">porcentagem</span> <span class="tok-o">=</span> <span class="tok-m">0.05</span>
+<span class="tok-p">}</span> <span class="tok-k">else</span> <span class="tok-p">{</span>
+    <span class="tok-n">porcentagem</span> <span class="tok-o">=</span> <span class="tok-m">0.0</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kd">val</span> <span class="tok-nv">desconto</span> <span class="tok-o">=</span> <span class="tok-n">total</span> <span class="tok-o">*</span> <span class="tok-n">porcentagem</span>
+
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Desconto: %.2f&quot;</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-n">desconto</span><span class="tok-p">))</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Variável declarada com <code>var</code>: pode ser alterada posteriormente.
+Foi preciso especificar o tipo <code>Double</code>, pois o compilador não poderia inferir o tipo automaticamente sem um valor inicial.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Veja que, neste caso, o camando <code>if</code> funciona exatamente como em Java.
+Mas, em Kotlin, o comando <code>if</code> pode ser usado como uma expressão que retorna um valor.
+Vejamos como ficaria o exemplo anterior:</p>
+</div>
+<div id="exemplo-desconto-2" class="listingblock">
+<div class="title">Expressão com if</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">total</span> <span class="tok-o">=</span> <span class="tok-m">23.0</span>
+<span class="tok-kd">val</span> <span class="tok-nv">porcentagem</span> <span class="tok-o">=</span> <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">total</span> <span class="tok-o">&gt;</span> <span class="tok-m">20</span><span class="tok-p">)</span> <span class="tok-m">0.05</span> <span class="tok-k">else</span> <span class="tok-m">0.0</span>    <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="tok-kd">val</span> <span class="tok-nv">desconto</span> <span class="tok-o">=</span> <span class="tok-n">total</span> <span class="tok-o">*</span> <span class="tok-n">porcentagem</span>
+
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Desconto: %.2f&quot;</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-n">desconto</span><span class="tok-p">))</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A variável <code>porcentagem</code> não precisa mais ser declarada com <code>var</code>.
+Agora, seu tipo também pode ser inferido pelo compilador.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Observe que, agora, o comando <code>if</code> funciona como o operador ternário da linguagem Java (<code>x &gt; y ? x : y</code>), retornando o primeiro valor, se a condição for verdadeira, ou o segundo, se a condição for falsa.</p>
+</div>
+<div class="paragraph">
+<p>Aliás, o operador ternário não existe na linguagem Kotlin.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_comando_when"><a class="link" href="#_comando_when">2.1.2. Comando when</a></h4>
+<div class="paragraph">
+<p>O <a href="https://pt.wikipedia.org/wiki/Alfabeto_fon%C3%A9tico_da_OTAN">alfabeto fonético da OTAN</a>&#8201;&#8212;&#8201;também conhecido como "alfabeto Zulu"&#8201;&#8212;&#8201;relaciona cada letra do alfabeto a uma palavra.
+Por exemplo: A &#8594; Alpha, B &#8594; Bravo, C &#8594; Charlie, e assim por diante.
+Esse alfabeto é usado em comunicações por rádio.
+Em vez de dizer "C - B", o transmissor da mensagem dirá "Charlie - Bravo", evitando erros de entendimento.</p>
+</div>
+<div class="paragraph">
+<p>Suponha que você precise desenvolver um programa que mostre a palavra correspondente a cada letra do alfabeto fonético.
+Uma boa opção seria usar o comando <code>when</code>.
+Veja a seguir.</p>
+</div>
+<div id="exemplo-otan" class="listingblock">
+<div class="title">Mapeamento para alfabeto fonético</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">letra</span> <span class="tok-o">=</span> <span class="tok-sc">&#39;b&#39;</span>
+<span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">letra</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-sc">&#39;a&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-p">{</span>    <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Alpha&quot;</span><span class="tok-p">)</span>
+    <span class="tok-p">}</span>
+    <span class="tok-sc">&#39;b&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Bravo&quot;</span><span class="tok-p">)</span>    <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="tok-sc">&#39;c&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Charlie&quot;</span><span class="tok-p">)</span>
+    <span class="tok-sc">&#39;d&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;Delta&quot;</span><span class="tok-p">)</span>
+    <span class="tok-k">else</span> <span class="tok-o">-&gt;</span> <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;???&quot;</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Após o símbolo <code>-&gt;</code>, deve vir um bloco de comandos delimitado por chaves (<code>{ }</code>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Para um único comando as chaves são opcionais.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>O comando <code>when</code> é similar ao comando <code>switch</code>, da linguagem Java.
+Ele compara seu argumento&#8201;&#8212;&#8201;neste caso a variável <code>letra</code>&#8201;&#8212;&#8201;com cada um dos ramos contido no bloco de código que o segue.
+Se o valor à esquerda do sinal <code>-&gt;</code> for igual ao valor atual do argumento, aquele bloco será executado.
+O ramo opcional <code>else</code> será executado se nenhum dos outros for selecionado.</p>
+</div>
+<div class="paragraph">
+<p>Assim como <code>if</code>, o comando <code>when</code> também pode ser usado como uma expressão.
+Veja como ficaria o exemplo anterior.</p>
+</div>
+<div id="exemplo-otan-expr" class="listingblock">
+<div class="title">Usando when como expressão</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">letra</span> <span class="tok-o">=</span> <span class="tok-sc">&#39;b&#39;</span>
+<span class="tok-kd">val</span> <span class="tok-nv">palavra</span> <span class="tok-o">=</span> <span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">letra</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-sc">&#39;a&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-s">&quot;Alpha&quot;</span>
+    <span class="tok-sc">&#39;b&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-s">&quot;Bravo&quot;</span>
+    <span class="tok-sc">&#39;c&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-s">&quot;Charlie&quot;</span>
+    <span class="tok-sc">&#39;d&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-s">&quot;Delta&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-o">-&gt;</span> <span class="tok-s">&quot;???&quot;</span>
+<span class="tok-p">}</span>
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">palavra</span><span class="tok-p">)</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dessa vez, usamos uma variável para receber a palavra selecionada pelo comando <code>when</code>.
+(Sim! É uma variável que não varia. Mas, daqui em diante, vamos simplificar chamando tudo de variável, mesmo que seja declarado com <code>val</code>).
+Nesta situação o ramo <code>else</code> se torna obrigatório, pois algum valor precisa ser retornado.
+Outra opção seria usar o <code>else</code> para gerar uma exceção.</p>
+</div>
+<div class="paragraph">
+<p>Vamos agora considerar outra situação.
+Imagine que você deseja relacionar uma letra à sua tecla correspondente em um teclado de telefone&#8201;&#8212;&#8201;como este que está ilustrado na figura <a href="#img-t9-keypad">Teclado de telefone</a>.
+Por exemplo, queremos relacionar b &#8594; 2, e &#8594; 3 e c &#8594; 2.</p>
+</div>
+<div id="img-t9-keypad" class="imageblock">
+<div class="content">
+<img src="images/ch02/telephone-keypad.svg" alt="Teclado de telefone" width="260">
+</div>
+<div class="title">Figura 5. Teclado de telefone</div>
+</div>
+<div class="paragraph">
+<p>Novamente, usaremos o comando <code>when</code>.
+Vamos começar com uma versão bastante direta, criando um mapeamento para cada letra.
+Veja:</p>
+</div>
+<div id="exemplo-t9" class="listingblock">
+<div class="title">Mapeando letras para teclas</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">letra</span> <span class="tok-o">=</span> <span class="tok-sc">&#39;e&#39;</span>
+<span class="tok-kd">val</span> <span class="tok-nv">numero</span> <span class="tok-o">=</span>
+    <span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">letra</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-sc">&#39;a&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">2</span>
+        <span class="tok-sc">&#39;b&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">2</span>
+        <span class="tok-sc">&#39;c&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">2</span>
+        <span class="tok-sc">&#39;d&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">3</span>
+        <span class="tok-sc">&#39;e&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">3</span>
+        <span class="tok-sc">&#39;f&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">3</span>
+        <span class="tok-k">else</span> <span class="tok-o">-&gt;</span> <span class="tok-m">0</span>
+    <span class="tok-p">}</span>
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">numero</span><span class="tok-p">)</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Esse programa vai ficar bastante longo e repetitivo, se mapearmos todas as 26 letras do alfabeto.
+A seguir, vamos explorar a sintaxe do comando <code>when</code> para simplificar o código.</p>
+</div>
+<div id="exemplo-t9-simplificado" class="listingblock">
+<div class="title">Comando when com valores separados por vírgula</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">letra</span> <span class="tok-o">=</span> <span class="tok-sc">&#39;e&#39;</span>
+<span class="tok-kd">val</span> <span class="tok-nv">numero</span> <span class="tok-o">=</span>
+    <span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">letra</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-sc">&#39;a&#39;</span><span class="tok-p">,</span> <span class="tok-sc">&#39;b&#39;</span><span class="tok-p">,</span> <span class="tok-sc">&#39;c&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">2</span>
+        <span class="tok-sc">&#39;d&#39;</span><span class="tok-p">,</span> <span class="tok-sc">&#39;e&#39;</span><span class="tok-p">,</span> <span class="tok-sc">&#39;f&#39;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">3</span>
+        <span class="tok-k">else</span> <span class="tok-o">-&gt;</span> <span class="tok-m">0</span>
+    <span class="tok-p">}</span>
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">numero</span><span class="tok-p">)</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As letras que levam à mesma tecla podem ser agrupadas em um só ramo, com os caracteres correspondentes separados por vírgula.
+É como se houvesse um operador OU entre eles: <code>a OU b OU c &#8594; 2</code>.</p>
+</div>
+<div class="paragraph">
+<p>Ainda podemos fazer mais uma simplificação.
+O operador <code>in</code> verifica se um valor <code>x</code> pertence a uma coleção.
+Por exemplo, podemos usar <code>in</code> para verificar se 3 pertence à lista [1, 3, 4, 5]&#8201;&#8212;&#8201;<code>3 in listOf(1, 3, 4, 5)</code>.
+Ou ainda, para verificar se 'b' faz parte da <em>string</em> "cebola"&#8201;&#8212;&#8201;<code>'b' in "cebola"</code>.
+Podemos usar esse operador em conjunto com o comando <code>when</code>, deixando o exemplo anterior da seguinte maneira:</p>
+</div>
+<div id="exemplo-t9-in" class="listingblock">
+<div class="title">Operador in em conjunto com when</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">letra</span> <span class="tok-o">=</span> <span class="tok-sc">&#39;e&#39;</span>
+<span class="tok-kd">val</span> <span class="tok-nv">numero</span> <span class="tok-o">=</span>
+    <span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">letra</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-k">in</span> <span class="tok-s">&quot;abc&quot;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">2</span>
+        <span class="tok-k">in</span> <span class="tok-s">&quot;def&quot;</span> <span class="tok-o">-&gt;</span> <span class="tok-m">3</span>
+        <span class="tok-k">else</span> <span class="tok-o">-&gt;</span> <span class="tok-m">0</span>
+    <span class="tok-p">}</span>
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">numero</span><span class="tok-p">)</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Usando esse recurso, obtivemos um código mais legível.
+Aliás, como vimos na seção <a href="#sec-origens-linguagem">Origens da linguagem</a>, gerar código mais legível, mais conciso, é um dos objetivos da linguagem Kotlin.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_enumerações_enums"><a class="link" href="#_enumerações_enums">2.1.3. Enumerações (enums)</a></h4>
+<div class="paragraph">
+<p>Para encerrar esta seção, vejamos uma situação envolvendo enumerações.</p>
+</div>
+<div class="paragraph">
+<p>Vamos determinar o fator de rendimento de um veículo, em função do tipo de combustível.
+Há dois combustíveis possíveis: álcool e gasolina.
+Usaremos uma enumeração para representá-los em nosso programa.
+Veja:</p>
+</div>
+<div id="exemplo-enum" class="listingblock">
+<div class="title">Enumerações</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">enum</span> <span class="tok-kd">class</span> <span class="tok-nc">Combustivel</span> <span class="tok-p">{</span>    <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="tok-n">ALCOOL</span><span class="tok-p">,</span> <span class="tok-n">GASOLINA</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kd">val</span> <span class="tok-nv">combustivel</span> <span class="tok-o">=</span> <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">ALCOOL</span>
+<span class="tok-kd">val</span> <span class="tok-nv">fatorRendimento</span> <span class="tok-o">=</span>
+    <span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">combustivel</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">ALCOOL</span> <span class="tok-o">-&gt;</span> <span class="tok-m">0.7</span>
+        <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">GASOLINA</span> <span class="tok-o">-&gt;</span> <span class="tok-m">1.0</span>
+    <span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Uma enumeração é declarada pelas palavras <code>enum class</code>&#8201;&#8212;&#8201;usadas em conjunto.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Observe que, dessa vez, o ramo <code>else</code> não está presente na expressão <code>when</code>.
+Ele se tornou opcional porque todas as possibilidades foram cobertas&#8201;&#8212;&#8201;isto é, o comando <code>when</code> contém um ramo para cada valor possível da enumeração.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_repetição"><a class="link" href="#_repetição">2.2. Repetição</a></h3>
+<div class="paragraph">
+<p>Vamos dar uma olhada nas estruturas de repetição&#8201;&#8212;&#8201;os laços&#8201;&#8212;&#8201;da linguagem Kotlin.</p>
+</div>
+<div class="sect3">
+<h4 id="_comando_while"><a class="link" href="#_comando_while">2.2.1. Comando while</a></h4>
+<div class="paragraph">
+<p>A estrutura dos comandos <code>while</code> e <code>do-while</code> é idêntica à de Java.
+Pronto! Poderíamos parar por aqui. Mas vamos ver um exemplo.</p>
+</div>
+<div class="paragraph">
+<p>O programa a seguir é uma solução para o problema <em>Números Ímpares</em> , disponível na plataforma <em>beecrowd</em>
+(<a href="https://www.beecrowd.com.br/judge/pt/problems/view/1067">bee #1067</a>).
+É um problema simples.
+Você deve ler um número inteiro X.
+Em seguida, deve mostrar os ímpares de 1 até X, um valor por linha&#8201;&#8212;&#8201;inclusive o X, se for o caso.</p>
+</div>
+<div id="exemplo-while" class="listingblock">
+<div class="title">Números ímpares</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-n">args</span><span class="tok-p">:</span> <span class="tok-n">Array</span><span class="tok-o">&lt;</span><span class="tok-kt">String</span><span class="tok-o">&gt;</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">limite</span> <span class="tok-o">=</span> <span class="tok-n">readLine</span><span class="tok-p">()</span><span class="tok-o">!!</span><span class="tok-p">.</span><span class="tok-na">toInt</span><span class="tok-p">()</span>    <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="tok-kd">var</span> <span class="tok-nv">n</span> <span class="tok-o">=</span> <span class="tok-m">1</span>
+    <span class="tok-k">while</span> <span class="tok-p">(</span><span class="tok-n">n</span> <span class="tok-o">&lt;=</span> <span class="tok-n">limite</span><span class="tok-p">)</span> <span class="tok-p">{</span>    <i class="conum" data-value="2"></i><b>(2)</b>
+        <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-p">)</span>
+        <span class="tok-n">n</span> <span class="tok-o">+=</span> <span class="tok-m">2</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Lendo um número inteiro do teclado</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Repetição com <code>while</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Para resolver o problema, temos que gerar a sequência 1, 3, 5, 7, &#8230;&#8203; .
+Assim, partindo de 1, somamos 2 ao número atual para obter o próximo ímpar.
+Repetimos essa operação <em>enquanto</em> o número for menor ou igual ao limite.
+Esse é o algoritmo implementado no exemplo anterior, por meio do comando <code>while</code>.</p>
+</div>
+<div class="paragraph">
+<p>As instruções <code>break</code> e <code>continue</code> também existem em Kotlin.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Crie uma versão do programa  <a href="#exemplo-while">Números ímpares</a> usando a instrução <code>break</code>.
+Fique à vontade para usar as constantes booleanas <code>true</code> e <code>false</code>, se precisar.</p>
+</div>
+<div class="paragraph">
+<p>Será uma versão bem menos elegante. Mas é só para praticar.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_comando_for"><a class="link" href="#_comando_for">2.2.2. Comando for</a></h4>
+<div class="paragraph">
+<p>A estrutura do comando <code>for</code> é semelhante àquela do comando <em>for-each</em> da linguagem Java.
+O <code>for</code> serve para percorrer elementos de um <em>iterator</em>.
+Na maioria dos casos, é usado para iterar por elementos uma coleção ou de um intervalo.
+Vejamos a seguir.</p>
+</div>
+<div id="exemplo-for-each" class="listingblock">
+<div class="title">Iterando por uma lista</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">val</span> <span class="tok-nv">produtos</span> <span class="tok-o">=</span> <span class="tok-n">listOf</span><span class="tok-p">(</span><span class="tok-s">&quot;alho&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;batata&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;cebola&quot;</span><span class="tok-p">,</span> <span class="tok-s">&quot;tomate&quot;</span><span class="tok-p">)</span>
+
+<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">p</span> <span class="tok-k">in</span> <span class="tok-n">produtos</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">p</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A cada iteração, a variável <code>p</code> assume o valor de um dos elementos da coleção <code>produtos</code>.
+Observe o operador <code>in</code> que, nesse contexto, assume a função de relacionar a variável de iteração <code>p</code> com a coleção.
+É uma função diferente da que foi vista no exemplo <a href="#exemplo-t9-in">Operador in em conjunto com when</a>.</p>
+</div>
+<div class="paragraph">
+<p>O comando <code>for</code> tradicional&#8201;&#8212;&#8201;<code>for (i=0; i &lt; n; i++)</code>&#8201;&#8212;&#8201;não existe em Kotlin, mas podemos usar intervalos (<em>ranges</em>) para iterar sobre intervalos numéricos.
+Intervalos são objetos que representam intervalos como [1..10]&#8201;&#8212;&#8201;de 1 até 10.
+Vejamos um caso de uso desse recurso.</p>
+</div>
+<div id="exemplo-for-range" class="listingblock">
+<div class="title">Iterando por intervalos numéricos</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><pre><span></span><span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-k">in</span> <span class="tok-m">1.</span><span class="tok-p">.</span><span class="tok-m">10</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>O comando <code>for</code> vai iterar pelos elementos do intervalo <code>1..10</code>.
+Observe a sintaxe: dois pontos (<code>..</code>) separam os valores inicial e final.
+Observe também que o limite final, 10, também faz parte do intervalo.</p>
+</div>
+<div class="paragraph">
+<p>O comando <code>for</code> de Kotlin é bastante parecido com o da linguagem <a href="https://groovy-lang.org/">Groovy</a>.
+Inclusive por usar o conceito de intervalos (<em>ranges</em>).</p>
+</div>
+<div class="paragraph">
+<p>Vejamos um exemplo final: uma contagem regressiva, de dois em dois.</p>
+</div>
+<div id="exemplo-for-downto" class="listingblock">
+<div class="title">Contagem regressiva de dois em dois</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><pre><span></span><span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-k">in</span> <span class="tok-m">10</span> <span class="tok-n">downTo</span> <span class="tok-m">0</span> <span class="tok-n">step</span> <span class="tok-m">2</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Neste caso, a iteração começará em 10 e terminará em 0 (<code>10 downTo 0</code>).
+Além disso, a contagem será de 2 em 2 (<code>step 2</code>).
+Portanto, o resultado será: 10, 8, 6, 4, 2, 0.</p>
+</div>
+<div class="paragraph">
+<p>Você pode saber mais sobre <code>downTo</code> e <code>step</code> consultando a <a href="https://kotlinlang.org/docs/ranges.html">documentação</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Experimente executar os exemplos do comando <code>for</code> no <a href="https://play.kotlinlang.org/">Kotlin Playground</a>.
+Lembre-se de definir um método <code>main()</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_funções"><a class="link" href="#_funções">2.3. Funções</a></h3>
+<div class="paragraph">
+<p>Nesta seção, vamos conhecer a sintaxe e os recursos da linguagem Kotlin para se trabalhar com funções.</p>
+</div>
+<div class="sect3">
+<h4 id="_definição_de_funções"><a class="link" href="#_definição_de_funções">2.3.1. Definição de funções</a></h4>
+<div class="paragraph">
+<p>No próximo exemplo, definiremos a função <code>isMultiplo(a, b)</code>, que retorna <em>verdadeiro</em>, se o parâmetro <code>a</code> for múltiplo de <code>b</code>, ou <em>falso</em> em caso contrário.
+Vamos usar este exemplo para para conhecer a sintaxe de definição de funções.</p>
+</div>
+<div id="exemplo-funcoes" class="listingblock">
+<div class="title">Definição e chamada de funções</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">isMultiplo</span><span class="tok-p">(</span><span class="tok-n">a</span><span class="tok-p">:</span> <span class="tok-kt">Int</span><span class="tok-p">,</span> <span class="tok-n">b</span><span class="tok-p">:</span> <span class="tok-kt">Int</span><span class="tok-p">):</span> <span class="tok-kt">Boolean</span> <span class="tok-p">{</span>  <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="tok-k">return</span> <span class="tok-p">(</span><span class="tok-n">a</span> <span class="tok-o">%</span> <span class="tok-n">b</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-m">0</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">res</span> <span class="tok-o">=</span> <span class="tok-n">isMultiplo</span><span class="tok-p">(</span><span class="tok-m">24</span><span class="tok-p">,</span> <span class="tok-m">3</span><span class="tok-p">)</span>  <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">res</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Definição de função: tipos são especificados à direita.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Chamada de função</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Uma função é definida pela palavra <code>fun</code>, seguida por seu nome e lista de parâmetros, entre parênteses.
+Logo após, vem o tipo de retorno da função&#8201;&#8212;&#8201;<code>Boolean</code>, neste caso.
+Por fim, temos o corpo da função especificado entre chaves (<code>{ }</code>).
+O comando <code>return</code> encerra a execução da função, podendo retornar um valor.
+Se não houver parâmetros, podemos deixar os parênteses vazios.</p>
+</div>
+<div class="paragraph">
+<p>Observe que os tipos são indicados à direita dos parâmetros, depois dos sinal de dois pontos&#8201;&#8212;&#8201;<code>a: Int, b: Int</code>.</p>
+</div>
+<div class="paragraph">
+<p>O corpo de uma função pode conter quantas instruções forem necessárias entre as chaves (<code>{ }</code>).
+Mas há casos em que o corpo da função é formado por uma só expressão.
+Pode-se, aí, fazer uma simplicação:</p>
+</div>
+<div id="exemplo-funcoes-expressao" class="listingblock">
+<div class="title">Funções com corpos de expressão</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">isMultiplo</span><span class="tok-p">(</span><span class="tok-n">a</span><span class="tok-p">:</span> <span class="tok-kt">Int</span><span class="tok-p">,</span> <span class="tok-n">b</span><span class="tok-p">:</span> <span class="tok-kt">Int</span><span class="tok-p">):</span> <span class="tok-kt">Boolean</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">a</span> <span class="tok-o">%</span> <span class="tok-n">b</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-m">0</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>O corpo da função, agora, é a expressão especificada após o sinal de igual (<code>=</code>)&#8201;&#8212;&#8201;<code>(a % b) == 0</code>.
+Observe que a instrução <code>return</code> não é mais necessária.</p>
+</div>
+<div class="paragraph">
+<p>A expressão que define a função pode ser complexa&#8201;&#8212;&#8201;formada por uma cadeia de <code>if/else</code> ou <code>when</code>, por exemplo.
+Vamos retornar ao exemplo <a href="#exemplo-enum">Enumerações</a>.
+Dessa vez, vamos definir uma função para extrair o fator de rendimento de cada combustível.</p>
+</div>
+<div id="exemplo-expressao-complexa" class="listingblock">
+<div class="title">Expressões complexas como corpos de funções</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">enum</span> <span class="tok-kd">class</span> <span class="tok-nc">Combustivel</span> <span class="tok-p">{</span>
+    <span class="tok-n">ALCOOL</span><span class="tok-p">,</span> <span class="tok-n">GASOLINA</span>
+<span class="tok-p">}</span>
+
+<span class="tok-kd">fun</span> <span class="tok-nf">fatorRendimento</span><span class="tok-p">(</span><span class="tok-n">combustivel</span><span class="tok-p">:</span> <span class="tok-n">Combustivel</span><span class="tok-p">)</span> <span class="tok-o">=</span>
+    <span class="tok-k">when</span> <span class="tok-p">(</span><span class="tok-n">combustivel</span><span class="tok-p">)</span> <span class="tok-p">{</span>  <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">ALCOOL</span> <span class="tok-o">-&gt;</span> <span class="tok-m">0.7</span>
+        <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">GASOLINA</span> <span class="tok-o">-&gt;</span> <span class="tok-m">1.0</span>
+    <span class="tok-p">}</span>
+
+<span class="tok-n">fatorRendimento</span><span class="tok-p">(</span><span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">ALCOOL</span><span class="tok-p">)</span>  <i class="conum" data-value="2"></i><b>(2)</b>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Expressão complexa como corpo da função</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Chamada à função</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Observe que o corpo da função agora é uma expressão <code>when</code>.
+Veja também que o tipo de retorno da função foi omitido&#8201;&#8212;&#8201;linha (5).
+O compilador poderá determinar o tipo de retorno da função por inferência, assim como ocorre com a declaração de variáveis.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_parâmetros_nomeados_e_valores_default"><a class="link" href="#_parâmetros_nomeados_e_valores_default">2.3.2. Parâmetros nomeados e valores default</a></h4>
+<div class="paragraph">
+<p>Vejamos mais dois recursos interessantes envolvendo funções: parâmetros nomeados e valores <em>default</em>.</p>
+</div>
+<div class="paragraph">
+<p>Imagine que você queira calcular o consumo de combustível em uma viagem.
+Você conhece o rendimento do seu carro, em Km/L, quando usa gasolina.
+Também sabe que, quando usa álcool, o rendimento cai para 70% desse valor.</p>
+</div>
+<div class="paragraph">
+<p>Assim, vamos definir uma função que receba:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>distância percorrida;</p>
+</li>
+<li>
+<p>rendimento em Km/L; e</p>
+</li>
+<li>
+<p>combustível usado na viagem.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A função vai retornar a quantidade de combustível consumida, em litros.
+Como você usa gasolina na maioria das vezes, esse será o valor <em>default</em> do parâmetro combustível.
+Aqui está o código:</p>
+</div>
+<div id="exemplo-parametros-nomeados" class="listingblock">
+<div class="title">Parâmetros nomeados e valores default</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">consumoViagem</span><span class="tok-p">(</span>
+    <span class="tok-n">distancia</span><span class="tok-p">:</span> <span class="tok-kt">Double</span><span class="tok-p">,</span>
+    <span class="tok-n">rendimento</span><span class="tok-p">:</span> <span class="tok-kt">Double</span><span class="tok-p">,</span>
+    <span class="tok-n">combustivel</span><span class="tok-p">:</span> <span class="tok-n">Combustivel</span> <span class="tok-o">=</span> <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">GASOLINA</span>  <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="tok-p">):</span> <span class="tok-kt">Double</span> <span class="tok-o">=</span> <span class="tok-n">distancia</span> <span class="tok-o">/</span> <span class="tok-p">(</span><span class="tok-n">rendimento</span> <span class="tok-o">*</span> <span class="tok-n">fatorRendimento</span><span class="tok-p">(</span><span class="tok-n">combustivel</span><span class="tok-p">))</span>
+
+<span class="tok-n">consumoViagem</span><span class="tok-p">(</span><span class="tok-m">45.0</span><span class="tok-p">,</span> <span class="tok-m">15.0</span><span class="tok-p">)</span>  <i class="conum" data-value="2"></i><b>(2)</b>
+<span class="tok-n">consumoViagem</span><span class="tok-p">(</span><span class="tok-m">45.0</span><span class="tok-p">,</span> <span class="tok-m">15.0</span><span class="tok-p">,</span> <span class="tok-n">Combustivel</span><span class="tok-p">.</span><span class="tok-na">ALCOOL</span><span class="tok-p">)</span>
+<span class="tok-n">consumoViagem</span><span class="tok-p">(</span><span class="tok-n">distancia</span> <span class="tok-o">=</span> <span class="tok-m">90.0</span><span class="tok-p">,</span> <span class="tok-m">10.0</span><span class="tok-p">)</span>  <i class="conum" data-value="3"></i><b>(3)</b>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Valor <em>default</em> para o parâmetro <code>combustivel</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Ao omitir o parâmetro <code>combustivel</code>, assume-se o valor <em>default</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Uso de parâmetro nomeado</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Na primeira chamada da função, vemos que o parâmetro <code>combustivel</code> é omitido. Portanto, será assumido o valor <em>default</em>, que é gasolina.</p>
+</div>
+<div class="paragraph">
+<p>Um parâmetro nomeado foi usado na linha (9) para indicar que a distância percorrida foi de 90 Km&#8201;&#8212;&#8201;<code>distancia = 90.0</code>.
+Esse recurso pode ser usado para aumentar a legibilidade do código-fonte.</p>
+</div>
+<div class="paragraph">
+<p>Nas chamadas da função <code>consumoViagem()</code>, os valores numéricos literais foram escritos com uma casa decimal&#8201;&#8212;&#8201;<code>45.0</code>, <code>15.0</code> e <code>10.0</code>.
+Isso é necessário porque a linguagem Kotlin <em>não faz conversão implícita de tipos</em>, nem mesmo entre tipos numéricos compatíveis, como inteiro e real.
+O valor literal <code>10</code>, escrito dessa forma, levaria o compilador a inferir o tipo <code>Int</code>. E este seria incompatível com o tipo <code>Double</code>, declarado na função.</p>
+</div>
+<div class="paragraph">
+<p>Conheceremos mais sobre o sistema de tipos da linguagem Kotlin no capítulo <a href="#ch04-sistema-tipos">Sistema de tipos</a>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Experimente usar parâmetros nomeados para alterar a ordem dos argumentos nas chamadas de funções.
+Experimente, por exemplo:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>consumoViagem(rendimento = 10.0, distancia = 100.0)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mudar arbitrariamente a ordem dos argumentos em uma chamada de função pode não ser uma boa prática de Engenharia de Software, mas é possível tecnicamente.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exceções"><a class="link" href="#_exceções">2.4. Exceções</a></h3>
+<div class="paragraph">
+<p>Uma exceção é uma condição anormal, que interrompe o fluxo de execução de uma função.
+Exceções podem ser capturadas e tratadas.
+O conceito é o mesmo para qualquer linguagem, mas a política de tratamento de exceções varia de uma linguagem para outra.</p>
+</div>
+<div class="paragraph">
+<p>A linguagem Java adota a política "tratar ou declarar" (<em>handle or declare</em>).
+Isso significa que exceções devem ser tratadas localmente com <code>try/catch</code> ou devem ser explicitamente propagadas por meio de uma declaração <code>throws</code>.
+Essa regra se aplica às exceções verificadas (<em>checked exceptions</em>), que são a maioria em Java.</p>
+</div>
+<div class="paragraph">
+<p>A linguagem Kotlin adota uma política diferente:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>É opcional tratar qualquer exceção.</p>
+</li>
+<li>
+<p>Não é preciso declarar as exceções lançadas por uma função.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Essa visão contribui bastante para reduzir a complexidade do código.
+Em Java, frequentemente somos obrigados a produzir código complexo e verboso, unicamente para atender às regras de tratamento de exceções.</p>
+</div>
+<div class="sect3">
+<h4 id="_lançando_exceções"><a class="link" href="#_lançando_exceções">2.4.1. Lançando exceções</a></h4>
+<div class="paragraph">
+<p>A linguagem Kotlin nos permite lançar exceções ao avaliar uma expressão.
+Vejamos um exemplo.
+Vamos definir a função <code>converterParaNota()</code>, que converte uma quantidade de pontos em uma nota de <em>A+</em> até <em>E</em>.</p>
+</div>
+<div id="exemplo-throw-notas" class="listingblock">
+<div class="title">Conversão de pontos para notas</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">converterParaNota</span><span class="tok-p">(</span><span class="tok-n">pontos</span><span class="tok-p">:</span> <span class="tok-kt">Double</span><span class="tok-p">):</span> <span class="tok-kt">String</span> <span class="tok-o">=</span>
+    <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">pontos</span> <span class="tok-o">&gt;=</span> <span class="tok-m">10.0</span><span class="tok-p">)</span> <span class="tok-s">&quot;A+&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">pontos</span> <span class="tok-o">&gt;=</span> <span class="tok-m">8.0</span><span class="tok-p">)</span> <span class="tok-s">&quot;A&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">pontos</span> <span class="tok-o">&gt;=</span> <span class="tok-m">6.0</span><span class="tok-p">)</span> <span class="tok-s">&quot;B&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">pontos</span> <span class="tok-o">&gt;=</span> <span class="tok-m">4.0</span><span class="tok-p">)</span> <span class="tok-s">&quot;C&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">pontos</span> <span class="tok-o">&gt;=</span> <span class="tok-m">2.0</span><span class="tok-p">)</span> <span class="tok-s">&quot;D&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">pontos</span> <span class="tok-o">&gt;=</span> <span class="tok-m">0.0</span><span class="tok-p">)</span> <span class="tok-s">&quot;E&quot;</span>
+    <span class="tok-k">else</span> <span class="tok-k">throw</span> <span class="tok-n">IllegalArgumentException</span><span class="tok-p">(</span><span class="tok-s">&quot;Pontuação inválida!&quot;</span><span class="tok-p">)</span>
+
+<span class="tok-kd">fun</span> <span class="tok-nf">main</span><span class="tok-p">()</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">nota</span> <span class="tok-o">=</span> <span class="tok-n">converterParaNota</span><span class="tok-p">(</span><span class="tok-o">-</span><span class="tok-m">1.0</span><span class="tok-p">)</span>
+    <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">nota</span><span class="tok-p">)</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Neste exemplo, as notas são classificadas em ordem decrescente.
+Começando pelas pontuações de 10 para cima, depois as de 8,0 para cima (que sejam menores do que 10), as de 6,0 para cima e assim por diante.
+Seguindo essa lógica, vemos que o último ramo <code>else</code> será acionado somente em casos de pontuações menores do que zero (negativas).
+E esse problema será sinalizado por meio de uma exceção.</p>
+</div>
+<div class="paragraph">
+<p>Perceba a ausência do operador <code>new</code> após a instrução <code>throw</code>.
+Instanciar uma exceção, assim como qualquer outro objeto, não requer esse operador.</p>
+</div>
+<div class="paragraph">
+<p>Na linguagem Kotlin, a instrução <code>throw</code> também é uma expressão, e pode ser usada onde um valor é esperado.
+Porém, o lançamento da exceção interrompe o fluxo normal de execução, fazendo com que nenhum valor válido seja gerado.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Execute o exemplo <a href="#exemplo-throw-notas">Conversão de pontos para notas</a> no Kotlin Playground.
+Experimente diferentes valores como argumento da função <code>converterParaNota()</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>É claro que <code>throw</code> também pode ser usado como uma instrução comum, sem que faça parte de uma expressão.
+Veja um exemplo:</p>
+</div>
+<div id="exemplo-throw-normal" class="listingblock">
+<div class="title">Tempo de viagem</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><pre><span></span><span class="tok-kd">fun</span> <span class="tok-nf">tempoViagem</span><span class="tok-p">(</span><span class="tok-n">distancia</span><span class="tok-p">:</span> <span class="tok-kt">Double</span><span class="tok-p">,</span> <span class="tok-n">velocidade</span><span class="tok-p">:</span> <span class="tok-kt">Double</span><span class="tok-p">):</span> <span class="tok-kt">Double</span> <span class="tok-p">{</span>
+    <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">distancia</span> <span class="tok-o">&lt;</span> <span class="tok-m">0</span> <span class="tok-o">||</span> <span class="tok-n">velocidade</span> <span class="tok-o">&lt;</span> <span class="tok-m">0</span><span class="tok-p">)</span>
+        <span class="tok-k">throw</span> <span class="tok-n">IllegalArgumentException</span><span class="tok-p">(</span><span class="tok-s">&quot;argumento inválido&quot;</span><span class="tok-p">)</span>
+
+    <span class="tok-kd">val</span> <span class="tok-nv">tempo</span> <span class="tok-o">=</span> <span class="tok-n">distancia</span> <span class="tok-o">/</span> <span class="tok-n">velocidade</span>
+    <span class="tok-k">return</span> <span class="tok-n">tempo</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Neste caso, <code>throw</code> também interrompe a execução da função, mas não faz parte de nenhuma expressão.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_capturando_exceções"><a class="link" href="#_capturando_exceções">2.4.2. Capturando exceções</a></h4>
+<div class="paragraph">
+<p>A principal diferença que temos no tratamento de exceções em Kotlin é que <code>try</code> também pode ser usado como uma expressão.
+Veja um caso a seguir.</p>
+</div>
+<div id="exemplo-try-data" class="listingblock">
+<div class="title">Conversão de string para data</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><pre><span></span><span class="tok-k">import</span> <span class="tok-nn">java.text.ParseException</span>
+<span class="tok-k">import</span> <span class="tok-nn">java.text.SimpleDateFormat</span>
+
+
+<span class="tok-kd">val</span> <span class="tok-nv">sdf</span> <span class="tok-o">=</span> <span class="tok-n">SimpleDateFormat</span><span class="tok-p">(</span><span class="tok-s">&quot;dd/MM/yyyy&quot;</span><span class="tok-p">)</span>
+<span class="tok-kd">val</span> <span class="tok-nv">input</span> <span class="tok-o">=</span> <span class="tok-s">&quot;22/041500&quot;</span>
+
+<span class="tok-kd">val</span> <span class="tok-nv">date</span> <span class="tok-o">=</span> <span class="tok-k">try</span> <span class="tok-p">{</span>  <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="tok-n">sdf</span><span class="tok-p">.</span><span class="tok-na">parse</span><span class="tok-p">(</span><span class="tok-n">input</span><span class="tok-p">)</span>
+<span class="tok-p">}</span> <span class="tok-k">catch</span> <span class="tok-p">(</span><span class="tok-n">e</span><span class="tok-p">:</span> <span class="tok-n">ParseException</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-kc">null</span>
+<span class="tok-p">}</span>
+
+<span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-n">date</span><span class="tok-p">)</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>A variável <code>date</code> receberá o valor retornado por <code>try</code> ou por <code>catch</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nesse exemplo, queremos converter uma <em>string</em> em um objeto data.
+O método <code>parse()</code>&#8201;&#8212;&#8201;que faz a conversão&#8201;&#8212;&#8201;pode lançar uma exceção do tipo <code>ParseException</code>.
+Poderíamos ignorá-la, já que Kotlin não nos obriga a tratar exceções.
+O programa simplesmente terminaria.
+Mas, em caso de exceção, queremos atribuir <code>null</code> à variável <code>date</code>.</p>
+</div>
+<div class="paragraph">
+<p>A instrução <code>try</code>&#8201;&#8212;&#8201;na linha (8)&#8201;&#8212;&#8201;inicia uma expressão.
+Se tudo correr normalmente, a última expressão do bloco <code>try</code> será retornada como resultado.
+No entanto, se ocorrer uma exceção, a última expressão do bloco <code>catch</code> é que será retornada.
+Ambos os blocos de código&#8201;&#8212;&#8201;tanto <code>try</code> quanto <code>catch</code>&#8201;&#8212;&#8201;poderiam conter várias linhas.</p>
+</div>
+<div class="paragraph">
+<p>O uso de <code>try</code> como expressão tende a simplificar o código.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Experiência"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Experimente modificar o código do exemplo <a href="#exemplo-try-data">Conversão de string para data</a> para usar um bloco <code>try-catch</code> tradicional.
+Compare sua versão com esta que é apresentada no exemplo.
+Quais modificações são necessárias?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A construção <code>try-catch-finally</code> também pode ser usada, assim como em Java.
+Veja um exemplo:</p>
+</div>
+<div id="exemplo-listar-clientes" class="listingblock">
+<div class="title">Listagem de clientes</div>
+<div class="content">
+<pre class="pygments highlight"><code data-lang="kotlin"><table class="linenotable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><pre><span></span><span class="tok-k">import</span> <span class="tok-nn">java.sql.Connection</span>
+<span class="tok-k">import</span> <span class="tok-nn">java.sql.SQLException</span>
+
+<span class="tok-kd">fun</span> <span class="tok-nf">listarClientes</span><span class="tok-p">(</span><span class="tok-n">conn</span><span class="tok-p">:</span> <span class="tok-n">Connection</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-kd">val</span> <span class="tok-nv">stmt</span> <span class="tok-o">=</span> <span class="tok-n">conn</span><span class="tok-p">.</span><span class="tok-na">createStatement</span><span class="tok-p">()</span>
+    <span class="tok-k">try</span> <span class="tok-p">{</span>
+        <span class="tok-kd">val</span> <span class="tok-nv">query</span> <span class="tok-o">=</span> <span class="tok-s">&quot;SELECT id, nome FROM clientes;&quot;</span>
+        <span class="tok-kd">val</span> <span class="tok-nv">rs</span> <span class="tok-o">=</span> <span class="tok-n">stmt</span><span class="tok-p">.</span><span class="tok-na">executeQuery</span><span class="tok-p">(</span><span class="tok-n">query</span><span class="tok-p">)</span>
+        <span class="tok-k">while</span> <span class="tok-p">(</span><span class="tok-n">rs</span><span class="tok-p">.</span><span class="tok-na">next</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+            <span class="tok-kd">val</span> <span class="tok-nv">id</span> <span class="tok-o">=</span> <span class="tok-n">rs</span><span class="tok-p">.</span><span class="tok-na">getInt</span><span class="tok-p">(</span><span class="tok-s">&quot;id&quot;</span><span class="tok-p">)</span>
+            <span class="tok-kd">val</span> <span class="tok-nv">nome</span> <span class="tok-o">=</span> <span class="tok-n">rs</span><span class="tok-p">.</span><span class="tok-na">getString</span><span class="tok-p">(</span><span class="tok-s">&quot;nome&quot;</span><span class="tok-p">)</span>
+            <span class="tok-n">println</span><span class="tok-p">(</span><span class="tok-s">&quot;ID: </span><span class="tok-si">$</span><span class="tok-n">id</span><span class="tok-s"> - Nome: </span><span class="tok-si">$</span><span class="tok-n">nome</span><span class="tok-s">&quot;</span><span class="tok-p">)</span>
+        <span class="tok-p">}</span>
+        <span class="tok-n">rs</span><span class="tok-p">.</span><span class="tok-na">close</span><span class="tok-p">()</span>
+    <span class="tok-p">}</span> <span class="tok-k">catch</span> <span class="tok-p">(</span><span class="tok-n">e</span><span class="tok-p">:</span> <span class="tok-n">SQLException</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-n">e</span><span class="tok-p">.</span><span class="tok-na">printStackTrace</span><span class="tok-p">()</span>
+    <span class="tok-p">}</span> <span class="tok-k">finally</span> <span class="tok-p">{</span>
+        <span class="tok-n">stmt</span><span class="tok-p">.</span><span class="tok-na">close</span><span class="tok-p">()</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</pre></td></tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nesse exemplo, temos um caso de uso típico da API JDBC.
+O bloco <code>catch</code> captura uma possível <code>SQLException</code> enquanto o bloco <code>finally</code> faz a liberação de recursos.</p>
+</div>
+<div class="paragraph">
+<p>Em Kotlin, não existe a estrutura <em>try-with-resources</em>, que foi introduzida em Java, na versão 7, para gerenciar recursos.
+A alternativa a essa estrutura é a função <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/use.html">use</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ch03-objetos-heranca"><a class="link" href="#ch03-objetos-heranca">3. Objetos e herança</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Capítulo em elaboração</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ch04-sistema-tipos"><a class="link" href="#ch04-sistema-tipos">4. Sistema de tipos</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Capítulo em elaboração</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ch05-programacao-funcional"><a class="link" href="#ch05-programacao-funcional">5. Programação funcional</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Capítulo em elaboração</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sobre_este_material"><a class="link" href="#_sobre_este_material">6. Sobre este material</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Este material foi escrito para programadores Java que querem conhecer a linguagem Kotlin.</p>
+</div>
+<div class="sect2">
+<h3 id="_objetivos"><a class="link" href="#_objetivos">Objetivos</a></h3>
+<div class="paragraph">
+<p>Buscamos alcançar os seguites objetivos com este material:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ser um texto de leitura rápida.</p>
+</li>
+<li>
+<p>Ser informativo.</p>
+</li>
+<li>
+<p>Permitir que o leitor pratique o uso da linguagem Kotlin assim que começar a leitura.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Para isso, estabelecemos os seguintes requisitos:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Transmitir informação por meio de exemplos.</p>
+</li>
+<li>
+<p>Cortar detalhes que não sejam essenciais.</p>
+</li>
+<li>
+<p>Minimizar o volume de texto.</p>
+</li>
+<li>
+<p>Aproveitar o conhecimento do leitor sobre Java. (É um material para quem conhece Java.)</p>
+</li>
+<li>
+<p>Conter exercícios.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_escopo"><a class="link" href="#_escopo">Escopo</a></h3>
+<div class="paragraph">
+<p>O conteúdo cobre os seguintes tópicos:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mecanismos básicos da linguagem Kotlin (variáveis, controle de fluxo, etc.)</p>
+</li>
+<li>
+<p>Declaração e chamada de funções</p>
+</li>
+<li>
+<p>Sistema de tipos da linguagem</p>
+</li>
+<li>
+<p>Orientação a objetos</p>
+</li>
+<li>
+<p>Lambdas e programação funcional</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_licença"><a class="link" href="#_licença">Licença</a></h3>
+<div class="paragraph">
+<p>Este material está disponível sob os termos da licença Creative Commons <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1">CC BY-NC 4.0</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_contato"><a class="link" href="#_contato">Contato</a></h3>
+<div class="paragraph">
+<p>Entre em contato preenchendo <a href="https://forms.gle/FTwaMW2t1nnFT3Zx9">este formulário</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f0f3f3; }
+pre.pygments .tok-c { color: #0099FF; font-style: italic } /* Comment */
+pre.pygments .tok-err { color: #AA0000; background-color: #FFAAAA } /* Error */
+pre.pygments .tok-k { color: #006699; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #555555 } /* Operator */
+pre.pygments .tok-ch { color: #0099FF; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #009999 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #0099FF; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #0099FF; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #003300; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #AAAAAA } /* Generic.Output */
+pre.pygments .tok-gp { color: #000099; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #003300; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #99CC66 } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #006699; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #006699 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #007788; font-weight: bold } /* Keyword.Type */
+pre.pygments .tok-m { color: #FF6600 } /* Literal.Number */
+pre.pygments .tok-s { color: #CC3300 } /* Literal.String */
+pre.pygments .tok-na { color: #330099 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #336666 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #00AA88; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #336600 } /* Name.Constant */
+pre.pygments .tok-nd { color: #9999FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #CC0000; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #CC00FF } /* Name.Function */
+pre.pygments .tok-nl { color: #9999FF } /* Name.Label */
+pre.pygments .tok-nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #330099; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #003333 } /* Name.Variable */
+pre.pygments .tok-ow { color: #000000; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #FF6600 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #FF6600 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #FF6600 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #FF6600 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #FF6600 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #CC3300 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #CC3300 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #CC3300 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #CC3300 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #CC3300 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #CC3300 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #AA0000 } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #CC3300 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #33AAAA } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #CC3300 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #FFCC33 } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #336666 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #CC00FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #003333 } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #003333 } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #003333 } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #003333 } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #FF6600 } /* Literal.Number.Integer.Long */
+</style>
+<div id="license">
+<!-- License: Creative Commons -->
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://mcrisc.github.io/kotlin-essencial/">Kotlin Essencial</a> by <span property="cc:attributionName">Marcelo Criscuolo</span> is licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"></a></p>
+</div>
+</body>
+</html>
