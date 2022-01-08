@@ -5,6 +5,7 @@
 :linkattrs:
 :hide-uri-scheme:
 :last-update-label!:
+:nofooter:
 :doctype: book
 :description: Uma introdução rápida à Linguagem Kotlin para programadores Java
 :pagenums:

@@ -10,6 +10,7 @@ code, pre {
 	content: "\1F9EA";
 }
 
-div#license {
+div#license > p {
         font-family: 'Fira Sans', sans-serif;
+        padding: 0.5em;
 }
