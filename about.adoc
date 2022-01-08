@@ -8,14 +8,14 @@ Este material foi escrito para programadores Java que querem conhecer a linguage
 
 === Objetivos
 
-Buscamos alcançar os seguites objetivos com este material:
+Buscamos alcançar os seguintes objetivos com este material:
 
 . Ser um texto de leitura rápida.
 . Ser informativo.
 . Permitir que o leitor pratique o uso da linguagem Kotlin assim que começar a leitura.
 
 
-Para isso, estabelecemos os seguintes requisitos:
+Para isso, estabelecemos os requisitos:
 
 * Transmitir informação por meio de exemplos.
 * Cortar detalhes que não sejam essenciais.
